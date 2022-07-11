@@ -1,0 +1,16 @@
+package entidad;
+
+import java.awt.Image;
+
+import javax.swing.JPanel;
+
+public class Panel extends JPanel {
+
+	private Image fondo;
+	
+	public Panel() {
+		preInit();
+		initCoponents();
+	}
+	
+}

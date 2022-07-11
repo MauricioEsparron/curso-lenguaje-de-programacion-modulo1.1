@@ -1,0 +1,11 @@
+package entidad;
+
+public class Tarjeta {
+
+	private int numero;
+	private int cod_cliente;
+	private int cod_cuenta;
+	private int num_cuenta;
+	
+	
+}

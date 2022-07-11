@@ -1,0 +1,14 @@
+package entidad;
+
+public class Transaccion {
+
+	private int cod_transaccion;
+	private int num_tarjeta;
+	private int cod_cliente;
+	private int num_cuenta;
+	private int cod_operacion;
+	private String fecha_transaccion;
+	private int cuenta_destino;
+	private double monto;
+
+}

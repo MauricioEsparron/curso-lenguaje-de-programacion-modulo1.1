@@ -1,0 +1,17 @@
+package interfaces;
+
+import entidad.Cliente;
+
+public interface ClienteInterfacesDAO {
+
+	//registrar
+	
+	public int registrar(Cliente c);
+	
+	
+	//actualizar 
+	
+	//eliminar
+	
+	
+}

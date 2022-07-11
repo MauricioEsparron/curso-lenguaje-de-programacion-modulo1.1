@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;c&apos; in &apos;mantenimiento.GestionEmpleadoDAO.actualizar(...)&apos; to &apos;e&apos;&#x0D;&#x0A;- Original project: &apos;Exa&apos;&#x0D;&#x0A;- Original element: &apos;mantenimiento.GestionEmpleadoDAO.actualizar(Empleado).c&apos;&#x0D;&#x0A;- Renamed element: &apos;c&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;c&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;mantenimiento{GestionEmpleadoDAO.java[GestionEmpleadoDAO~actualizar~QEmpleado;@c!1247!1256!1256!1256!QEmpleado;!0!true" name="e" references="true" stamp="1655778287209" version="1.0"/>
+</session>

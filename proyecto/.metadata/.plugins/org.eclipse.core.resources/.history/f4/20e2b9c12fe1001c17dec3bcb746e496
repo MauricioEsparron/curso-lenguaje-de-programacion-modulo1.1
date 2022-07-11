@@ -1,0 +1,97 @@
+package vista;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.SystemColor;
+
+public class Logueo extends JFrame {
+
+	private JPanel contentPane;
+	private JLabel lblNumeroTarjeta;
+	private JLabel lblCodigoCuenta;
+	private JTextField txtNumeroTarjeta;
+	private JTextField txtCodigoCuenta;
+	private JButton btnAceptar;
+	private JButton btnSalir;
+	private JLabel lblNewLabel;
+	private JLabel lblTiempo;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Logueo frame = new Logueo();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Logueo() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+
+		lblNumeroTarjeta = new JLabel("Num. Trajeta :");
+		lblNumeroTarjeta.setBounds(119, 85, 86, 19);
+		contentPane.add(lblNumeroTarjeta);
+
+		lblCodigoCuenta = new JLabel("Cod. Cuenta :");
+		lblCodigoCuenta.setBounds(119, 128, 86, 19);
+		contentPane.add(lblCodigoCuenta);
+
+		txtNumeroTarjeta = new JTextField();
+		txtNumeroTarjeta.setBounds(215, 84, 111, 20);
+		contentPane.add(txtNumeroTarjeta);
+		txtNumeroTarjeta.setColumns(10);
+
+		txtCodigoCuenta = new JTextField();
+		txtCodigoCuenta.setBounds(215, 127, 111, 20);
+		contentPane.add(txtCodigoCuenta);
+		txtCodigoCuenta.setColumns(10);
+
+		btnAceptar = new JButton("Aceptar");
+		btnAceptar.setForeground(SystemColor.desktop);
+		btnAceptar.setBounds(149, 186, 89, 23);
+		contentPane.add(btnAceptar);
+
+		btnSalir = new JButton("Salir");
+		btnSalir.setForeground(SystemColor.desktop);
+		btnSalir.setBounds(281, 186, 89, 23);
+		contentPane.add(btnSalir);
+
+		lblNewLabel = new JLabel("Esta ventana se cerrara en");
+		lblNewLabel.setBounds(89, 30, 149, 14);
+		contentPane.add(lblNewLabel);
+
+		lblTiempo = new JLabel("10s");
+		lblTiempo.setBounds(248, 30, 46, 14);
+		contentPane.add(lblTiempo);
+	}
+
+	void iniciarConteo() {
+		for (int i = 10; i <= 0; i--) {
+
+			lblTiempo.setText(i + "s");
+		}
+
+	}
+}

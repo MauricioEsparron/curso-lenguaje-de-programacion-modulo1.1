@@ -1,0 +1,418 @@
+package vista;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.swing.JTextField;
+import com.toedter.calendar.JDateChooser;
+
+import entidad.Tarjeta;
+import mantenimiento.GestionTarjetaDAO;
+import utils.Validaciones;
+
+import javax.swing.JButton;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
+import javax.swing.JComboBox;
+
+public class FrmTarjeta extends JInternalFrame implements ActionListener, KeyListener {
+
+	private JPanel contentPane;
+	private JLabel lblNewLabel;
+	private JLabel lblNumeroTarjeta;
+	private JLabel lblCodigoCliente;
+	private JLabel lblCodigoCuenta;
+	private JLabel lblNumeroCuenta;
+	private JLabel lblFechaAfiliacion;
+	private JLabel lblFechaCaducidad;
+	private JLabel lblSaldo;
+	private JTextField txtNumeroTarjeta;
+	private JTextField txtCodigoCuenta;
+	private JTextField txtNumeroCuenta;
+	private JTextField txtSaldo;
+	private JDateChooser dcFechaCaducidad;
+	private JButton btnNuevo;
+	private JButton btnGuardar;
+	private JScrollPane scrollPane;
+	private JButton btnReporte;
+	private JTextField txtFechaAfiliacion;
+	private JTextArea txtS;
+	private JButton btnAyuda;
+	private JButton btnAyuda_1;
+	private JButton btnAyuda_2;
+	private JButton btnAyuda_3;
+	private JLabel lblNumTarjAyuda;
+	private JLabel lblCodCliAyuda;
+	private JLabel lblCodCuentAyuda;
+	private JLabel lblNumCuentAyuda;
+	private JComboBox cboCodigoCliente;
+
+	GestionTarjetaDAO gTarjeta = new GestionTarjetaDAO();
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					FrmTarjeta frame = new FrmTarjeta();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public FrmTarjeta() {
+		setClosable(true);
+		setIconifiable(true);
+		setMaximizable(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 519, 523);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+
+		lblNewLabel = new JLabel("Mantenimiento de Tarjeta");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(0, 22, 503, 14);
+		contentPane.add(lblNewLabel);
+
+		lblNumeroTarjeta = new JLabel("Numero Tarjeta :");
+		lblNumeroTarjeta.setBounds(10, 62, 96, 14);
+		contentPane.add(lblNumeroTarjeta);
+
+		lblCodigoCliente = new JLabel("cod cliente :");
+		lblCodigoCliente.setBounds(10, 87, 96, 14);
+		contentPane.add(lblCodigoCliente);
+
+		lblCodigoCuenta = new JLabel("Cod cuenta :");
+		lblCodigoCuenta.setBounds(10, 112, 96, 14);
+		contentPane.add(lblCodigoCuenta);
+
+		lblNumeroCuenta = new JLabel("Num cuenta :");
+		lblNumeroCuenta.setBounds(10, 137, 96, 14);
+		contentPane.add(lblNumeroCuenta);
+
+		lblFechaAfiliacion = new JLabel("Fecha afiliación :");
+		lblFechaAfiliacion.setBounds(10, 163, 96, 14);
+		contentPane.add(lblFechaAfiliacion);
+
+		lblFechaCaducidad = new JLabel("Fecha caducidad :");
+		lblFechaCaducidad.setBounds(10, 188, 96, 14);
+		contentPane.add(lblFechaCaducidad);
+
+		lblSaldo = new JLabel("Saldo :");
+		lblSaldo.setBounds(10, 213, 96, 14);
+		contentPane.add(lblSaldo);
+
+		txtNumeroTarjeta = new JTextField();
+		txtNumeroTarjeta.addKeyListener(this);
+		txtNumeroTarjeta.setBounds(127, 59, 86, 20);
+		contentPane.add(txtNumeroTarjeta);
+		txtNumeroTarjeta.setColumns(10);
+
+		txtCodigoCuenta = new JTextField();
+		txtCodigoCuenta.addKeyListener(this);
+		txtCodigoCuenta.setBounds(127, 109, 86, 20);
+		contentPane.add(txtCodigoCuenta);
+		txtCodigoCuenta.setColumns(10);
+
+		txtNumeroCuenta = new JTextField();
+		txtNumeroCuenta.addKeyListener(this);
+		txtNumeroCuenta.setText(" ");
+		txtNumeroCuenta.setBounds(127, 134, 86, 20);
+		contentPane.add(txtNumeroCuenta);
+		txtNumeroCuenta.setColumns(10);
+
+		txtSaldo = new JTextField();
+		txtSaldo.setBounds(127, 213, 86, 20);
+		contentPane.add(txtSaldo);
+		txtSaldo.setColumns(10);
+
+		dcFechaCaducidad = new JDateChooser();
+		dcFechaCaducidad.setBounds(127, 188, 129, 20);
+		contentPane.add(dcFechaCaducidad);
+
+		btnNuevo = new JButton("Nuevo");
+		btnNuevo.setBounds(374, 57, 104, 29);
+		contentPane.add(btnNuevo);
+
+		btnGuardar = new JButton("Guardar");
+		btnGuardar.addActionListener(this);
+		btnGuardar.setBounds(374, 96, 104, 29);
+		contentPane.add(btnGuardar);
+
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 250, 483, 232);
+		contentPane.add(scrollPane);
+
+		txtS = new JTextArea();
+		scrollPane.setViewportView(txtS);
+
+		btnReporte = new JButton("Reporte");
+		btnReporte.addActionListener(this);
+		btnReporte.setBounds(374, 136, 104, 29);
+		contentPane.add(btnReporte);
+
+		txtFechaAfiliacion = new JTextField();
+		txtFechaAfiliacion.setEditable(false);
+		txtFechaAfiliacion.setBounds(127, 160, 86, 20);
+		contentPane.add(txtFechaAfiliacion);
+		txtFechaAfiliacion.setColumns(10);
+
+		txtFechaAfiliacion.setText(new SimpleDateFormat("yyyy/MM/dd").format(new Date()));
+
+		btnAyuda = new JButton("...");
+		btnAyuda.addActionListener(this);
+		btnAyuda.setBounds(218, 58, 21, 23);
+		contentPane.add(btnAyuda);
+
+		btnAyuda_1 = new JButton("...");
+		btnAyuda_1.addActionListener(this);
+		btnAyuda_1.setBounds(218, 83, 21, 23);
+		contentPane.add(btnAyuda_1);
+
+		btnAyuda_2 = new JButton("...");
+		btnAyuda_2.addActionListener(this);
+		btnAyuda_2.setBounds(218, 108, 21, 23);
+		contentPane.add(btnAyuda_2);
+
+		btnAyuda_3 = new JButton("...");
+		btnAyuda_3.addActionListener(this);
+		btnAyuda_3.setBounds(218, 133, 21, 23);
+		contentPane.add(btnAyuda_3);
+
+		lblNumTarjAyuda = new JLabel("(6 digitos)");
+		lblNumTarjAyuda.setBounds(249, 62, 115, 14);
+		lblNumTarjAyuda.setVisible(false);
+		contentPane.add(lblNumTarjAyuda);
+
+		lblCodCliAyuda = new JLabel("(seleccione)");
+		lblCodCliAyuda.setBounds(249, 87, 115, 14);
+		lblCodCliAyuda.setVisible(false);
+		contentPane.add(lblCodCliAyuda);
+
+		lblCodCuentAyuda = new JLabel("(4 digitos)");
+		lblCodCuentAyuda.setBounds(249, 112, 115, 14);
+		lblCodCuentAyuda.setVisible(false);
+		contentPane.add(lblCodCuentAyuda);
+
+		lblNumCuentAyuda = new JLabel("(10 digitos)");
+		lblNumCuentAyuda.setBounds(249, 137, 115, 14);
+		lblNumCuentAyuda.setVisible(false);
+		contentPane.add(lblNumCuentAyuda);
+
+		cboCodigoCliente = new JComboBox();
+		cboCodigoCliente.setBounds(126, 83, 87, 22);
+		contentPane.add(cboCodigoCliente);
+
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnAyuda_3) {
+			actionPerformedBtnAyuda_3(e);
+		}
+		if (e.getSource() == btnAyuda_2) {
+			actionPerformedBtnAyuda_2(e);
+		}
+		if (e.getSource() == btnAyuda_1) {
+			actionPerformedBtnAyuda_1(e);
+		}
+		if (e.getSource() == btnAyuda) {
+			actionPerformedBtnAyuda(e);
+		}
+		if (e.getSource() == btnGuardar) {
+			actionPerformedBtnGuardar(e);
+		}
+		if (e.getSource() == btnReporte) {
+			actionPerformedBtnReporte(e);
+		}
+	}
+
+	protected void actionPerformedBtnReporte(ActionEvent e) {
+
+		String fechaAfiliacion, fechaCaducidad;
+
+		fechaAfiliacion = new SimpleDateFormat("yyyy/MM/dd").format(new Date());
+		fechaCaducidad = getfechaCaducidad();
+
+		txtS.setText("Fecha Afiliación  : " + fechaAfiliacion + "\n");
+		txtS.append("Fecha Caducidad   : " + fechaCaducidad);
+
+	}
+
+	private String getfechaCaducidad() {
+
+		return new SimpleDateFormat("yyyy/MM/dd").format(dcFechaCaducidad.getDate());
+	}
+
+	protected void actionPerformedBtnGuardar(ActionEvent e) {
+		registrar();
+	}
+
+	private void registrar() {
+		int numTarjeta;
+		int codCliente;
+		int codCuenta;
+		int numCuenta;
+		String fecAfiliacion;
+		String fecCaducidad;
+		double saldo;
+
+		numTarjeta = leerNumeroTarjeta();
+		codCliente = leerCodigoCliente();
+		codCuenta = leerCodigoCuenta();
+		fecAfiliacion = leerFechaAfiliacion();
+		fecCaducidad = leerFechaCaducidad();
+		saldo = leerSaldo();
+
+		if (numTarjeta == -1 || codCliente == -1 || codCuenta == -1 || fecAfiliacion == null || fecCaducidad == null) {
+			return;
+		}
+
+		Tarjeta t = new Tarjeta();
+
+		t.setNum_Tarjeta(numTarjeta);
+		t.setCod_cliente(codCliente);
+		t.setCod_cuenta(codCuenta);
+		t.setFecAfliacion(fecAfiliacion);
+		t.setFecCaducidad(fecCaducidad);
+		t.setSaldo(saldo);
+
+		int res = gTarjeta.registrar(t);
+
+		if (res == 0) {
+			mensajeError("Erro en el registro");
+		} else {
+			mensajeExitoso("Registro Exitoso");
+		}
+	}
+
+	private void mensajeExitoso(String msj) {
+		JOptionPane.showMessageDialog(this, msj, "Sistema", 1);
+	}
+
+	private void mensajeError(String msj) {
+		JOptionPane.showMessageDialog(this, msj, "Error !!!", 0);
+
+	}
+
+	private double leerSaldo() {
+		double saldo = -1;
+		return 0;
+	}
+
+	private String leerFechaCaducidad() {
+		String fecCaducidad = null;
+		return null;
+	}
+
+	private String leerFechaAfiliacion() {
+		String fecAfiliacion = null;
+		return null;
+	}
+
+	private int leerCodigoCuenta() {
+		int codCeunta = -1;
+		return 0;
+	}
+
+	private int leerCodigoCliente() {
+		int codCliente = -1;
+		return 0;
+	}
+
+	private int leerNumeroTarjeta() {
+		int numTarjeta = -1;
+		if (txtNumeroTarjeta.getText().trim().length() == 0) {
+			mensajeError("El campos es obligatorio, porfavor ingresa el número de tarjeta");
+			txtNumeroTarjeta.requestFocus();
+			txtNumeroTarjeta.setBackground(Color.RED);
+			numTarjeta = -1;
+		} else if (txtNumeroTarjeta.getText().trim().matches(Validaciones.NUM_TARJETA)) {
+			numTarjeta = Integer.parseInt(txtNumeroTarjeta.getText());
+		} else {
+			mensajeError("El número de tarjeta no es válido asegurate de que contenga 6 digitos");
+		}
+
+		return 0;
+	}
+
+	protected void actionPerformedBtnAyuda(ActionEvent e) {
+		lblNumTarjAyuda.setVisible(true);
+	}
+
+	protected void actionPerformedBtnAyuda_1(ActionEvent e) {
+		lblCodCliAyuda.setVisible(true);
+
+	}
+
+	protected void actionPerformedBtnAyuda_2(ActionEvent e) {
+		lblCodCuentAyuda.setVisible(true);
+
+	}
+
+	protected void actionPerformedBtnAyuda_3(ActionEvent e) {
+		lblNumCuentAyuda.setVisible(true);
+
+	}
+
+	public void keyPressed(KeyEvent e) {
+		if (e.getSource() == txtNumeroCuenta) {
+			keyPressedTxtNumeroCuenta(e);
+		}
+		if (e.getSource() == txtCodigoCuenta) {
+			keyPressedTxtCodigoCuenta(e);
+		}
+		if (e.getSource() == txtNumeroTarjeta) {
+			keyPressedTxtNumeroTarjeta(e);
+		}
+	}
+
+	public void keyReleased(KeyEvent e) {
+	}
+
+	public void keyTyped(KeyEvent e) {
+	}
+
+	protected void keyPressedTxtNumeroTarjeta(KeyEvent e) {
+		lblNumTarjAyuda.setVisible(false);
+
+	}
+
+	protected void keyPressedTxtCodigoCuenta(KeyEvent e) {
+		lblCodCuentAyuda.setVisible(false);
+
+	}
+
+	protected void keyPressedTxtNumeroCuenta(KeyEvent e) {
+		lblNumCuentAyuda.setVisible(false);
+
+	}
+}

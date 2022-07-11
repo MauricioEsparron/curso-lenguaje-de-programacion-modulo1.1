@@ -1,0 +1,310 @@
+package vista;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.JPasswordField;
+import javax.swing.JButton;
+import com.toedter.calendar.JDateChooser;
+
+import entidad.Usuario;
+import mantenimiento.GestionUsuarioDAO;
+import utils.Validaciones;
+
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.awt.event.ActionEvent;
+
+public class FrmRegistro extends JFrame implements ActionListener {
+
+	private JPanel contentPane;
+	private JTextField txtNombre;
+	private JTextField txtApellido;
+	private JTextField txtUsuario;
+	private JPasswordField txtClave;
+	private JDateChooser txtFecha;
+	// instaciar objetos
+	GestionUsuarioDAO gUser = new GestionUsuarioDAO();
+	private JButton btnActualizar;
+	private JButton btnEliminar;
+	private JTextField txtCodigo;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					FrmRegistro frame = new FrmRegistro();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public FrmRegistro() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+
+		JLabel lblRegistroDeUsuario = new JLabel("Registro de Usuario");
+		lblRegistroDeUsuario.setBounds(28, 11, 224, 32);
+		contentPane.add(lblRegistroDeUsuario);
+
+		JLabel lblCdigo = new JLabel("C\u00F3digo:");
+		lblCdigo.setBounds(28, 65, 46, 14);
+		contentPane.add(lblCdigo);
+
+		JLabel lblAutogenerado = new JLabel("Autogenerado");
+		lblAutogenerado.setBounds(184, 65, 92, 14);
+		contentPane.add(lblAutogenerado);
+
+		JLabel lblNombre = new JLabel("Nombre:");
+		lblNombre.setBounds(28, 94, 46, 14);
+		contentPane.add(lblNombre);
+
+		JLabel lblApellido = new JLabel("Apellido:");
+		lblApellido.setBounds(28, 121, 46, 14);
+		contentPane.add(lblApellido);
+
+		JLabel lblUsuario = new JLabel("Usuario:");
+		lblUsuario.setBounds(28, 146, 46, 14);
+		contentPane.add(lblUsuario);
+
+		JLabel lblClave = new JLabel("Clave:");
+		lblClave.setBounds(28, 176, 46, 14);
+		contentPane.add(lblClave);
+
+		JLabel lblFecha = new JLabel("Fecha:");
+		lblFecha.setBounds(28, 206, 46, 14);
+		contentPane.add(lblFecha);
+
+		txtNombre = new JTextField();
+		txtNombre.setBounds(87, 91, 130, 20);
+		contentPane.add(txtNombre);
+		txtNombre.setColumns(10);
+
+		txtApellido = new JTextField();
+		txtApellido.setColumns(10);
+		txtApellido.setBounds(87, 118, 130, 20);
+		contentPane.add(txtApellido);
+
+		txtUsuario = new JTextField();
+		txtUsuario.setColumns(10);
+		txtUsuario.setBounds(87, 146, 68, 20);
+		contentPane.add(txtUsuario);
+
+		txtClave = new JPasswordField();
+		txtClave.setBounds(87, 173, 71, 20);
+		contentPane.add(txtClave);
+
+		JButton btnRegistrar = new JButton("Registrar");
+		btnRegistrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				registrarDatos();
+			}
+		});
+		btnRegistrar.setBounds(302, 78, 89, 23);
+		contentPane.add(btnRegistrar);
+
+		JButton btnLimpiar = new JButton("Limpiar");
+		btnLimpiar.setBounds(302, 142, 89, 23);
+		contentPane.add(btnLimpiar);
+
+		txtFecha = new JDateChooser();
+		txtFecha.setDateFormatString("dd-MM-yyyy");
+		txtFecha.setBounds(87, 200, 95, 20);
+		contentPane.add(txtFecha);
+		
+		btnActualizar = new JButton("Actualizar");
+		btnActualizar.addActionListener(this);
+		btnActualizar.setBounds(302, 112, 89, 23);
+		contentPane.add(btnActualizar);
+		
+		btnEliminar = new JButton("Eliminar");
+		btnEliminar.setBounds(302, 172, 89, 23);
+		contentPane.add(btnEliminar);
+		
+		txtCodigo = new JTextField();
+		txtCodigo.setBounds(88, 62, 86, 20);
+		contentPane.add(txtCodigo);
+		txtCodigo.setColumns(10);
+	}
+
+	void registrarDatos() {
+		// variables
+		String nomb, ape, user, clave, fecha;
+		// entradas
+		nomb = getNombre();
+		ape = getApellido();
+		user = getUsuario();
+		clave = getClave();
+		fecha = getFecha();
+
+		// validar
+		if (nomb == null || ape == null || user == null || clave == null || fecha == null) {
+			return;
+		} else {
+
+			// procesos
+			// crear un objeto de la clase Usuario
+
+			Usuario u = new Usuario();
+
+			// setear
+			u.setNombre(nomb);
+			u.setApellido(ape);
+			u.setUsuario(user);
+			u.setClave(clave);
+			u.setFNacim(fecha);
+
+			// llamar al método registrar
+			int res = gUser.registrar(u);
+			// validar el resultado del proceso de registrar
+			if (res == 0) {
+				mensajeError("Error en el registro");
+			} else {
+				mensajeExitoso("Registro Exitoso");
+			}
+		}
+	}
+
+	private void mensajeExitoso(String msj) {
+		JOptionPane.showMessageDialog(this, msj, "Sistema", 1);
+	}
+
+	private String getFecha() {
+		String fecha;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		// completar validación
+		fecha = sdf.format(txtFecha.getDate());
+		return fecha;
+	}
+
+	private String getClave() {// validar
+		String pass = null;
+		pass = String.valueOf(txtClave.getPassword());
+
+		return pass;
+	}
+
+	private String getUsuario() {
+		String user = null;
+		if (txtUsuario.getText().trim().length() == 0) {
+			mensajeError("Ingresar el usuario eje: A001");
+			txtUsuario.requestFocus();
+		} else if (txtUsuario.getText().trim().matches(Validaciones.USUARIO)) {
+			user = txtUsuario.getText().trim();
+		} else {
+			mensajeError("Formato incorrecto, eje: A001 ");
+			txtUsuario.setText("");
+			txtUsuario.requestFocus();
+		}
+		return user;
+	}
+
+	private String getApellido() {
+		String ape = null;
+		if (txtApellido.getText().trim().length() == 0) {
+			mensajeError("Ingresar el Apellido");
+			txtApellido.requestFocus();
+		} else if (txtApellido.getText().trim().matches(Validaciones.APELLIDO)) {
+			ape = txtApellido.getText().trim();
+		} else {
+			mensajeError("Formato incorrecto, ingresar de 2 a 25 letras en Apellido ");
+			txtApellido.setText("");
+			txtApellido.requestFocus();
+		}
+		return ape;
+	}
+
+	private String getNombre() {
+		String nomb = null;
+		if (txtNombre.getText().trim().length() == 0) {
+			mensajeError("Ingresar el nombre");
+			txtNombre.requestFocus();
+		} else if (txtNombre.getText().trim().matches(Validaciones.NOMBRE)) {
+			nomb = txtNombre.getText().trim();
+		} else {
+			mensajeError("Formato incorrecto, ingresar de 3 a 15 letras en Nombre ");
+			txtNombre.setText("");
+			txtNombre.requestFocus();
+		}
+		return nomb;
+	}
+
+	private void mensajeError(String msj) {
+		JOptionPane.showMessageDialog(this, msj, "Error", 0);
+
+	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnActualizar) {
+			actionPerformedBtnActualizar(e);
+		}
+	}
+	protected void actionPerformedBtnActualizar(ActionEvent e) {
+		
+		//declarar variables
+		int codigo;
+		String nomb,ape,user,clave,fecha;
+		//obtener los datos de GUI
+		codigo = getCodigo();
+		nomb = getNombre();
+		ape = getApellido();
+		user = getUsuario();
+		clave = getClave();
+		fecha = getFecha();
+
+		//validar
+		if(codigo == -1 || nomb == null ||ape == null || user == null || clave == null || fecha == null) {
+			return;
+		}else {
+			//crear un objeto de la clase "Usuario"
+			Usuario u = new Usuario();
+			//setear --> asignar los valores obtendios de la GUI a los atributos privados
+			u.setNombre(nomb);
+			u.setApellido(ape);
+			u.setUsuario(fecha);
+			u.setClave(clave);
+			u.setFNacim(fecha);
+			u.setCodigo(codigo);
+			
+			//llamar al proceso actualizar
+			int ok = gUser.actualizar(u);
+			//validarb el resultado del rpoceso actualizar
+			if(ok == 0) {
+				mensajeError("Error en la actualización");
+			}else {
+				mensajeExitoso("Usuario actualizado");
+			}
+		}
+		
+	}
+	private int getCodigo() {
+		int cod = -1;
+		if(txtCodigo.getText().trim().length() == 0) {
+			mensajeError("Ingresar el código");
+			txtCodigo.requestFocus();
+			cod = -1;
+		}else {
+			cod = Integer.parseInt(txtCodigo.getText());
+		}
+		return cod;
+		
+	}
+}

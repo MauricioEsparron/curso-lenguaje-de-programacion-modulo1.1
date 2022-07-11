@@ -1,0 +1,16 @@
+package mantenimiento;
+
+import java.util.ArrayList;
+
+import entidad.TipoOperacion;
+import interfaces.TipoOperacionInterfacesDAO;
+
+public class GestionTipoOperacionDAO implements TipoOperacionInterfacesDAO {
+
+	@Override
+	public ArrayList<TipoOperacion> listaTipooperacion() {
+
+		return null;
+	}
+
+}

@@ -1,0 +1,41 @@
+package mantenimiento;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+import entidad.Tarjeta;
+import interfaces.TarjetaInrterfacesDAO;
+import utils.MySQLConexion8;
+
+public class GestionTarjetaDAO implements TarjetaInrterfacesDAO {
+
+	@Override
+	public int registrar(Tarjeta t) {
+
+		int res = 0;
+		Connection con = null;
+		PreparedStatement pstm = null;
+		try {
+
+			con = MySQLConexion8.getConexion();
+			String sql = "insert into tb_tarjeta values('321546','5', default,'8335796429','2022-10-21','2027-10-21','7500')";
+			
+
+		} catch (Exception e) {
+			System.out.println(">>>>>> Error en la instrucción SQL - Registrar" + e.getMessage());
+		}
+
+		return res;
+	}
+
+	@Override
+	public int actualizar(Tarjeta t) {
+		return 0;
+	}
+
+	@Override
+	public int eliminar(int num_Tarjeta) {
+		return 0;
+	}
+
+}

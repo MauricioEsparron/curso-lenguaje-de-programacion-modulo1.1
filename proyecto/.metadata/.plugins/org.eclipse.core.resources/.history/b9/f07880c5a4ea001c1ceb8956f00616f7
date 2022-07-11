@@ -1,0 +1,15 @@
+package interfaces;
+
+import entidad.Movimiento;
+
+public interface MovimientoInterfacesDAO {
+
+	public int registrar(Movimiento m);
+
+	public int actualizar(Movimiento m);
+
+	public int eliminar(int codigoMovimiento);
+	
+	
+
+}

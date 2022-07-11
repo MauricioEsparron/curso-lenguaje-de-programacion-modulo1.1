@@ -1,0 +1,14 @@
+package interfaces;
+
+import entidad.Tarjeta;
+
+public interface TarjetaInrterfacesDAO {
+		
+	public int registrar(Tarjeta t);
+	
+	public int actualizar(Tarjeta t);
+
+	public int eliminar(int num_Tarjeta);
+		
+
+}

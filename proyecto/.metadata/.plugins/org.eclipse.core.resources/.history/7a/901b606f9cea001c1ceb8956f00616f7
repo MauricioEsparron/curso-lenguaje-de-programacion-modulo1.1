@@ -1,0 +1,446 @@
+package vista;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+import utils.Validaciones;
+
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.JButton;
+import javax.swing.ImageIcon;
+import javax.swing.JTable;
+import java.awt.Font;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.swing.SwingConstants;
+import javax.swing.JScrollPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
+
+public class FrmRegistroMovimiento extends JFrame implements ActionListener, KeyListener, MouseListener {
+
+	private JPanel contentPane;
+	private JLabel lblNumeroTarjeta;
+	private JLabel lblCodigoCliente;
+	private JLabel lblNumeroDeCuenta;
+	private JLabel lblCodigoOperacion;
+	private JLabel lblFechaMovimiento;
+	private JLabel lblNewLabel;
+	private JLabel lblMonto;
+	private JTextField txtNumeroTarjeta;
+	private JTextField txtNumeroDeCuenta;
+	private JComboBox cboOperacion;
+	private JTextField txtFechaMovimiento;
+	private JTextField txtCuentaDestino;
+	private JTextField txtMonto;
+	private JButton btnGuardar;
+	private JButton btnEliminar;
+	private JTable tblTarjeta;
+	private JButton btnCerrar;
+	private JButton btnNuevo;
+	private JLabel lblNewLabel_1;
+	private JScrollPane scrollPane;
+
+	DefaultTableModel model = new DefaultTableModel();
+	private JComboBox cboCodigoCliente;
+	private JLabel lblNewLabel_2;
+	private JTextField txtCodigoMoviniento;
+	private JButton btnAyuda;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					FrmRegistroMovimiento frame = new FrmRegistroMovimiento();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public FrmRegistroMovimiento() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 717, 553);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+
+		lblNumeroTarjeta = new JLabel("Nro. Tarjeta :");
+		lblNumeroTarjeta.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNumeroTarjeta.setBounds(10, 106, 109, 14);
+		contentPane.add(lblNumeroTarjeta);
+
+		lblCodigoCliente = new JLabel("Cod. Cliente :");
+		lblCodigoCliente.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblCodigoCliente.setBounds(10, 131, 109, 14);
+		contentPane.add(lblCodigoCliente);
+
+		lblNumeroDeCuenta = new JLabel("Num. cuenta :");
+		lblNumeroDeCuenta.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNumeroDeCuenta.setBounds(10, 156, 109, 14);
+		contentPane.add(lblNumeroDeCuenta);
+
+		lblCodigoOperacion = new JLabel("Operación :");
+		lblCodigoOperacion.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblCodigoOperacion.setBounds(10, 184, 109, 14);
+		contentPane.add(lblCodigoOperacion);
+
+		lblFechaMovimiento = new JLabel("Fecha Transacción :");
+		lblFechaMovimiento.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblFechaMovimiento.setBounds(10, 209, 122, 14);
+		contentPane.add(lblFechaMovimiento);
+
+		lblNewLabel = new JLabel("Cuenta destino :");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel.setBounds(10, 234, 109, 14);
+		contentPane.add(lblNewLabel);
+
+		lblMonto = new JLabel("Monto :");
+		lblMonto.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblMonto.setBounds(10, 259, 109, 14);
+		contentPane.add(lblMonto);
+
+		txtNumeroTarjeta = new JTextField();
+		txtNumeroTarjeta.addKeyListener(this);
+		txtNumeroTarjeta.setBounds(142, 103, 86, 20);
+		contentPane.add(txtNumeroTarjeta);
+		txtNumeroTarjeta.setColumns(10);
+
+		txtNumeroDeCuenta = new JTextField();
+		txtNumeroDeCuenta.addKeyListener(this);
+		txtNumeroDeCuenta.setBounds(142, 153, 86, 20);
+		contentPane.add(txtNumeroDeCuenta);
+		txtNumeroDeCuenta.setColumns(10);
+
+		cboOperacion = new JComboBox();
+		cboOperacion.addMouseListener(this);
+		cboOperacion.addKeyListener(this);
+		cboOperacion.setBounds(142, 180, 114, 22);
+		contentPane.add(cboOperacion);
+
+		txtFechaMovimiento = new JTextField();
+		txtFechaMovimiento.setEditable(false);
+		txtFechaMovimiento.setBounds(142, 206, 86, 20);
+		contentPane.add(txtFechaMovimiento);
+		txtFechaMovimiento.setColumns(10);
+
+		txtCuentaDestino = new JTextField();
+		txtCuentaDestino.addKeyListener(this);
+		txtCuentaDestino.setBounds(142, 231, 86, 20);
+		contentPane.add(txtCuentaDestino);
+		txtCuentaDestino.setColumns(10);
+
+		txtMonto = new JTextField();
+		txtMonto.addKeyListener(this);
+		txtMonto.setBounds(142, 256, 86, 20);
+		contentPane.add(txtMonto);
+		txtMonto.setColumns(10);
+
+		btnGuardar = new JButton("Guardar");
+		btnGuardar.addActionListener(this);
+		btnGuardar.setIcon(
+				new ImageIcon(FrmRegistroMovimiento.class.getResource("/img/7351060_bookmark_favorite_star_save_icon.png")));
+		btnGuardar.setBounds(538, 153, 114, 39);
+		contentPane.add(btnGuardar);
+
+		btnEliminar = new JButton("Eliminar");
+		btnEliminar.setIcon(new ImageIcon(
+				FrmRegistroMovimiento.class.getResource("/img/370086_bin_delete_empty_out_recycle_icon (1).png")));
+		btnEliminar.setBounds(414, 103, 114, 39);
+		contentPane.add(btnEliminar);
+
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 287, 681, 216);
+		contentPane.add(scrollPane);
+
+		tblTarjeta = new JTable();
+		tblTarjeta.setFillsViewportHeight(true);
+		scrollPane.setViewportView(tblTarjeta);
+
+		btnCerrar = new JButton("Cerrar");
+		btnCerrar.setIcon(new ImageIcon(
+				FrmRegistroMovimiento.class.getResource("/img/646197_cancel_close_cross_delete_remove_icon.png")));
+		btnCerrar.setBounds(538, 206, 114, 39);
+		contentPane.add(btnCerrar);
+
+		btnNuevo = new JButton("Nuevo");
+		btnNuevo.setIcon(new ImageIcon(FrmRegistroMovimiento.class.getResource("/img/370092_add_plus_create_new_icon.png")));
+		btnNuevo.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnNuevo.setBounds(538, 103, 114, 39);
+		contentPane.add(btnNuevo);
+
+		lblNewLabel_1 = new JLabel("MantenimientoTransacción");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 17));
+		lblNewLabel_1.setBounds(10, 20, 271, 20);
+		contentPane.add(lblNewLabel_1);
+
+		txtFechaMovimiento.setText(new SimpleDateFormat("yyyy/MM/dd").format(new Date()));
+
+		model.addColumn("Nro Tarjeta");
+		model.addColumn("Cod Cliente");
+		model.addColumn("Num Cuenta");
+		model.addColumn("Operación");
+		model.addColumn("Fec Transacción");
+		model.addColumn("Cuenta destino");
+		model.addColumn("Monto");
+
+		tblTarjeta.setModel(model);
+
+		cboCodigoCliente = new JComboBox();
+		cboCodigoCliente.setBounds(142, 127, 86, 22);
+		contentPane.add(cboCodigoCliente);
+		
+		lblNewLabel_2 = new JLabel(" Cod. Movimiento :");
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_2.setBounds(10, 81, 122, 14);
+		contentPane.add(lblNewLabel_2);
+		
+		txtCodigoMoviniento = new JTextField();
+		txtCodigoMoviniento.setBounds(142, 78, 86, 20);
+		contentPane.add(txtCodigoMoviniento);
+		txtCodigoMoviniento.setColumns(10);
+		
+		btnAyuda = new JButton("...");
+		btnAyuda.setBounds(238, 77, 23, 23);
+		contentPane.add(btnAyuda);
+
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnGuardar) {
+			actionPerformedBtnGuardar(e);
+		}
+	}
+
+	protected void actionPerformedBtnGuardar(ActionEvent e) {
+		ingresar();
+	}
+
+	private void ingresar() {
+
+		int num_Tarjeta, operacion, cod_cliente, cod_cuenta, cuenta_destino;
+		String fecTransaccion;
+		double monto;
+
+		num_Tarjeta = leerNumeroTarjeta();
+		cod_cliente = leerCodigoCliente();
+		cod_cuenta = leerCuenta();
+		operacion = leerOperacion();
+		fecTransaccion = leerfecTransaccion();
+		cuenta_destino = leerCuentaDestino();
+		monto = leerMonto();
+
+		if (num_Tarjeta == -1 || cod_cliente == -1 || cod_cuenta == -1 || operacion == 0 || fecTransaccion == null
+				|| cuenta_destino == -1 || monto == -1) {
+			return;
+		} else {
+
+			Object fila[] = { num_Tarjeta, cod_cliente, cod_cuenta, operacion, fecTransaccion, cuenta_destino, monto };
+			model.addRow(fila);
+		}
+	}
+
+	private double leerMonto() {
+		double monto = -1;
+		if (txtMonto.getText().trim().length() == 0) {
+			mensajeError("");
+		} else if (txtMonto.getText().trim().matches(Validaciones.MONTO)) {
+			monto = Double.parseDouble(txtMonto.getText());
+		} else {
+			mensajeError("Solo se puede realizar transacciones hasta de S/.5000");
+			txtMonto.setText("");
+			txtMonto.requestFocus();
+			txtMonto.setBackground(Color.RED);
+			monto = -1;
+		}
+		return monto;
+
+	}
+
+	private int leerCuentaDestino() {
+		int cuentaDestino = -1;
+		if (txtCuentaDestino.getText().trim().length() == 0) {
+			mensajeError("Debe s ingresar este campo para poder continuar con la operación ");
+		} else if (txtCuentaDestino.getText().trim().matches(Validaciones.NUM_CUENTA)) {
+			cuentaDestino = Integer.parseInt(txtCuentaDestino.getText());
+		} else {
+			mensajeError("El número de cuenta no existe");
+			txtCuentaDestino.setText("");
+			txtCuentaDestino.requestFocus();
+			txtCuentaDestino.setBackground(Color.RED);
+			cuentaDestino = -1;
+		}
+		return cuentaDestino;
+	}
+
+	private String leerfecTransaccion() {
+		String fecTrans = null;
+		if (txtFechaMovimiento.getText().trim().length() == 0) {
+			mensajeError("");
+		}
+		return fecTrans;
+	}
+
+	private int leerOperacion() {
+		int operacion = 0;
+		if (cboOperacion.getSelectedIndex() == 0) {
+			mensajeError("Debe seleccionar el tipo de operacion a realizar, para poder continuar");
+			cboOperacion.setSelectedIndex(0);
+			operacion = 0;
+		} else if (operacion != 0) {
+			operacion = Integer.parseInt(txtCuentaDestino.getText());
+		} else {
+			mensajeError("Formato del código no válido. Ejem 0001");
+			cboOperacion.setSelectedIndex(0);
+			cboOperacion.setBackground(Color.RED);
+			operacion = 0;
+		}
+		return operacion;
+	}
+
+	private int leerCuenta() {
+		int cuenta = -1;
+		if (txtCuentaDestino.getText().trim().length() == 0) {
+			mensajeError("El campo es obligatorio, porfavor ingresa tu cuenta");
+			txtCuentaDestino.requestFocus();
+			cuenta = -1;
+		} else if (txtCuentaDestino.getText().trim().matches(Validaciones.NUM_CUENTA)) {
+			cuenta = Integer.parseInt(txtCuentaDestino.getText());
+		} else {
+			mensajeError("Formato del código no válido. Ejem 0001");
+			txtCuentaDestino.setText("");
+			txtCuentaDestino.requestFocus();
+			txtCuentaDestino.setBackground(Color.RED);
+			cuenta = -1;
+		}
+		return cuenta;
+	}
+
+	private int leerCodigoCliente() {
+		int codCliente = 0;
+		if (codCliente == 0) {
+			mensajeError("Debes seleccionar el código de un cliente");
+			cboCodigoCliente.setSelectedIndex(0);
+			cboCodigoCliente.setBackground(Color.RED);
+			codCliente = 0;
+		} else if (codCliente != 0) {
+			codCliente = cboCodigoCliente.getSelectedIndex();
+		} else {
+			mensajeError("Ocurro un problema, intentalo de nuevo");
+			cboCodigoCliente.setSelectedIndex(0);
+			cboCodigoCliente.setBackground(Color.RED);
+			codCliente = 0;
+		}
+		return codCliente;
+	}
+
+	private int leerNumeroTarjeta() {
+		int numTarjeta = -1;
+		if (txtNumeroTarjeta.getText().trim().length() == 0) {
+			mensajeError("");
+			txtNumeroTarjeta.requestFocus();
+			numTarjeta = -1;
+		} else if (txtNumeroTarjeta.getText().trim().matches(Validaciones.NUM_TARJETA)) {
+			numTarjeta = Integer.parseInt(txtNumeroTarjeta.getText());
+		} else {
+			mensajeError("Formato del código no válido. Debe contener 16 caracteres");
+			txtNumeroTarjeta.setText("");
+			txtNumeroTarjeta.requestFocus();
+			txtNumeroTarjeta.setBackground(Color.RED);
+			numTarjeta = -1;
+		}
+		return numTarjeta;
+	}
+
+	private void mensajeError(String msj) {
+		JOptionPane.showMessageDialog(this, msj, "Error !!!", 0);
+
+	}
+
+	public void keyPressed(KeyEvent e) {
+
+		if (e.getSource() == txtMonto) {
+			keyPressedTxtMonto(e);
+		}
+		if (e.getSource() == txtCuentaDestino) {
+			keyPressedTxtCuentaDestino(e);
+		}
+		if (e.getSource() == txtNumeroDeCuenta) {
+			keyPressedTxtNumeroDeCuenta(e);
+		}
+		if (e.getSource() == txtNumeroTarjeta) {
+			keyPressedTxtNumeroTarjeta(e);
+		}
+	}
+
+	public void keyReleased(KeyEvent e) {
+	}
+
+	public void keyTyped(KeyEvent e) {
+	}
+
+	protected void keyPressedTxtNumeroTarjeta(KeyEvent e) {
+		txtNumeroTarjeta.setBackground(Color.WHITE);
+	}
+
+	protected void keyPressedTxtNumeroDeCuenta(KeyEvent e) {
+		txtNumeroDeCuenta.setBackground(Color.WHITE);
+
+	}
+
+	protected void keyPressedTxtCuentaDestino(KeyEvent e) {
+		txtCuentaDestino.setBackground(Color.WHITE);
+
+	}
+
+	protected void keyPressedTxtMonto(KeyEvent e) {
+		txtMonto.setBackground(Color.WHITE);
+
+	}
+
+	public void mouseClicked(MouseEvent e) {
+		if (e.getSource() == cboOperacion) {
+			mouseClickedCboOperacion(e);
+		}
+	}
+
+	public void mouseEntered(MouseEvent e) {
+	}
+
+	public void mouseExited(MouseEvent e) {
+	}
+
+	public void mousePressed(MouseEvent e) {
+	}
+
+	public void mouseReleased(MouseEvent e) {
+	}
+
+	protected void mouseClickedCboOperacion(MouseEvent e) {
+		cboOperacion.setBackground(Color.WHITE);
+	}
+}

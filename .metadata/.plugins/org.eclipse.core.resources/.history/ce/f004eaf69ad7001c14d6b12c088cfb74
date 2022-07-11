@@ -1,0 +1,383 @@
+package vista;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.JPasswordField;
+import javax.swing.JButton;
+
+import com.toedter.calendar.JDateChooser;
+
+import entidad.Usuario;
+import mantenimiento.GestionUsuarioDAO;
+import utils.Validaciones;
+
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.awt.event.ActionEvent;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
+import javax.swing.ImageIcon;
+
+public class FrmRegistro extends JFrame implements ActionListener {
+
+	private JPanel contentPane;
+	private JTextField txtNombre;
+	private JTextField txtApellido;
+	private JTextField txtUsuario;
+	private JPasswordField txtClave;
+	private JDateChooser txtFecha;
+	// instaciar objetos
+	GestionUsuarioDAO gUser = new GestionUsuarioDAO();
+	private JButton btnActualizar;
+	private JButton btnEliminar;
+	private JTextField txtCodigo;
+	private JTable table;
+	private JScrollPane scrollPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					FrmRegistro frame = new FrmRegistro();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public FrmRegistro() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 692, 478);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+
+		JLabel lblRegistroDeUsuario = new JLabel("Registro de Usuario");
+		lblRegistroDeUsuario.setBounds(28, 11, 224, 32);
+		contentPane.add(lblRegistroDeUsuario);
+
+		JLabel lblCdigo = new JLabel("C\u00F3digo:");
+		lblCdigo.setBounds(455, 99, 59, 14);
+		contentPane.add(lblCdigo);
+
+		JLabel lblAutogenerado = new JLabel("Autogenerado");
+		lblAutogenerado.setBounds(527, 71, 92, 14);
+		contentPane.add(lblAutogenerado);
+
+		JLabel lblNombre = new JLabel("Nombre:");
+		lblNombre.setBounds(455, 128, 59, 14);
+		contentPane.add(lblNombre);
+
+		JLabel lblApellido = new JLabel("Apellido:");
+		lblApellido.setBounds(455, 155, 59, 14);
+		contentPane.add(lblApellido);
+
+		JLabel lblUsuario = new JLabel("Usuario:");
+		lblUsuario.setBounds(455, 180, 59, 14);
+		contentPane.add(lblUsuario);
+
+		JLabel lblClave = new JLabel("Clave:");
+		lblClave.setBounds(455, 210, 59, 14);
+		contentPane.add(lblClave);
+
+		JLabel lblFecha = new JLabel("Fecha:");
+		lblFecha.setBounds(455, 240, 59, 14);
+		contentPane.add(lblFecha);
+
+		txtNombre = new JTextField();
+		txtNombre.setBounds(527, 125, 130, 20);
+		contentPane.add(txtNombre);
+		txtNombre.setColumns(10);
+
+		txtApellido = new JTextField();
+		txtApellido.setColumns(10);
+		txtApellido.setBounds(527, 152, 130, 20);
+		contentPane.add(txtApellido);
+
+		txtUsuario = new JTextField();
+		txtUsuario.setColumns(10);
+		txtUsuario.setBounds(527, 180, 68, 20);
+		contentPane.add(txtUsuario);
+
+		txtClave = new JPasswordField();
+		txtClave.setBounds(527, 207, 71, 20);
+		contentPane.add(txtClave);
+
+		JButton btnRegistrar = new JButton("Registrar");
+		btnRegistrar.setIcon(
+				new ImageIcon(FrmRegistro.class.getResource("/img/2290864_art_document_draw_list_note_icon.png")));
+		btnRegistrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				registrarDatos();
+			}
+		});
+		btnRegistrar.setBounds(514, 282, 130, 32);
+		contentPane.add(btnRegistrar);
+
+		JButton btnLimpiar = new JButton("Limpiar");
+		btnLimpiar.setIcon(
+				new ImageIcon(FrmRegistro.class.getResource("/img/7351060_bookmark_favorite_star_save_icon.png")));
+		btnLimpiar.setBounds(514, 392, 130, 32);
+		contentPane.add(btnLimpiar);
+
+		txtFecha = new JDateChooser();
+		txtFecha.setDateFormatString("dd-MM-yyyy");
+		txtFecha.setBounds(527, 234, 95, 20);
+		contentPane.add(txtFecha);
+
+		btnActualizar = new JButton("Actualizar");
+		btnActualizar.setIcon(new ImageIcon(
+				FrmRegistro.class.getResource("/img/1976055_edit_edit document_edit file_edited_editing_icon.png")));
+		btnActualizar.addActionListener(this);
+		btnActualizar.setBounds(514, 320, 130, 33);
+		contentPane.add(btnActualizar);
+
+		btnEliminar = new JButton("Eliminar");
+		btnEliminar.setIcon(
+				new ImageIcon(FrmRegistro.class.getResource("/img/370086_bin_delete_empty_out_recycle_icon (1).png")));
+		btnEliminar.addActionListener(this);
+		btnEliminar.setBounds(514, 358, 130, 32);
+		contentPane.add(btnEliminar);
+
+		txtCodigo = new JTextField();
+		txtCodigo.setEnabled(false);
+		txtCodigo.setBounds(528, 96, 86, 20);
+		contentPane.add(txtCodigo);
+		txtCodigo.setColumns(10);
+
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 84, 435, 340);
+		contentPane.add(scrollPane);
+
+		table = new JTable();
+		table.setFillsViewportHeight(true);
+		scrollPane.setViewportView(table);
+	}
+
+	void registrarDatos() {
+		// variables
+		String nomb, ape, user, clave, fecha;
+		// entradas
+		nomb = getNombre();
+		ape = getApellido();
+		user = getUsuario();
+		clave = getClave();
+		fecha = getFecha();
+
+		// validar
+		if (nomb == null || ape == null || user == null || clave == null || fecha == null) {
+			return;
+		} else {
+
+			// procesos
+			// crear un objeto de la clase Usuario
+
+			Usuario u = new Usuario();
+
+			// setear
+			u.setNombre(nomb);
+			u.setApellido(ape);
+			u.setUsuario(user);
+			u.setClave(clave);
+			u.setFNacim(fecha);
+
+			// llamar al método registrar
+			int res = gUser.registrar(u);
+			// validar el resultado del proceso de registrar
+			if (res == 0) {
+				mensajeError("Error en el registro");
+			} else {
+				mensajeExitoso("Registro Exitoso");
+			}
+		}
+	}
+
+	private void mensajeExitoso(String msj) {
+		JOptionPane.showMessageDialog(this, msj, "Sistema", 1);
+	}
+
+	private String getFecha() {
+		String fecha;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		// completar validación
+		fecha = sdf.format(txtFecha.getDate());
+		if (txtFecha.getDate() == null) {
+			mensajeError("Debes seleccionar una fecha");
+			txtFecha.setDate(null);
+			txtFecha.requestFocus();
+		} else if (txtFecha.getDate() != null) {
+			fecha = txtFecha.getDate();
+		}
+		return fecha;
+	}
+
+	private String getClave() {// validar
+		String pass = null;
+		pass = String.valueOf(txtClave.getPassword());
+		if (txtClave.getPassword().length == 0) {
+			mensajeError("Debes ingresar una clave que contenga 5 carcateres");
+			txtClave.setText("");
+			txtClave.requestFocus();
+		} else if (txtClave.getPassword() != null) {
+		}
+
+		return pass;
+	}
+
+	private String getUsuario() {
+		String user = null;
+		if (txtUsuario.getText().trim().length() == 0) {
+			mensajeError("Ingresar el usuario eje: U001");
+			txtUsuario.setText("");
+			txtUsuario.requestFocus();
+		} else if (txtUsuario.getText().trim().matches(Validaciones.USUARIO)) {
+			user = txtUsuario.getText().trim();
+		} else {
+			mensajeError("Formato incorrecto, eje: U001 ");
+			txtUsuario.setText("");
+			txtUsuario.requestFocus();
+		}
+		return user;
+	}
+
+	private String getApellido() {
+		String ape = null;
+		if (txtApellido.getText().trim().length() == 0) {
+			mensajeError("Ingresar el Apellido");
+			txtApellido.setText("");
+			txtApellido.requestFocus();
+		} else if (txtApellido.getText().trim().matches(Validaciones.APELLIDO)) {
+			ape = txtApellido.getText().trim();
+		} else {
+			mensajeError("Formato incorrecto, ingresar de 2 a 25 letras en Apellido ");
+			txtApellido.setText("");
+			txtApellido.requestFocus();
+		}
+		return ape;
+	}
+
+	private String getNombre() {
+		String nomb = null;
+		if (txtNombre.getText().trim().length() == 0) {
+			mensajeError("Ingresar el nombre");
+			txtNombre.setText("");
+			txtNombre.requestFocus();
+		} else if (txtNombre.getText().trim().matches(Validaciones.NOMBRE)) {
+			nomb = txtNombre.getText().trim();
+		} else {
+			mensajeError("Formato incorrecto, ingresar de 3 a 15 letras en Nombre ");
+			txtNombre.setText("");
+			txtNombre.requestFocus();
+		}
+		return nomb;
+	}
+
+	private void mensajeError(String msj) {
+		JOptionPane.showMessageDialog(this, msj, "Error", 0);
+
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnEliminar) {
+			actionPerformedBtnEliminar(e);
+		}
+		if (e.getSource() == btnActualizar) {
+			actionPerformedBtnActualizar(e);
+		}
+	}
+
+	protected void actionPerformedBtnActualizar(ActionEvent e) {
+
+		// declarar variables
+		int codigo;
+		String nomb, ape, user, clave, fecha;
+		// obtener los datos de GUI
+		codigo = getCodigo();
+		nomb = getNombre();
+		ape = getApellido();
+		user = getUsuario();
+		clave = getClave();
+		fecha = getFecha();
+
+		// validar
+		if (codigo == -1 || nomb == null || ape == null || user == null || clave == null || fecha == null) {
+			return;
+		} else {
+			// crear un objeto de la clase "Usuario"
+			Usuario u = new Usuario();
+			// setear --> asignar los valores obtendios de la GUI a los atributos privados
+			u.setNombre(nomb);
+			u.setApellido(ape);
+			u.setUsuario(user);
+			u.setClave(clave);
+			u.setFNacim(fecha);
+			u.setCodigo(codigo);
+
+			// llamar al proceso actualizar
+			int ok = gUser.actualizar(u);
+			// validarb el resultado del rpoceso actualizar
+			if (ok == 0) {
+				mensajeError("Error en la actualización");
+			} else {
+				mensajeExitoso("Usuario actualizado");
+			}
+		}
+
+	}
+
+	private int getCodigo() {
+		int cod = -1;
+		if (txtCodigo.getText().trim().length() == 0) {
+			mensajeError("Ingresar el código");
+			txtCodigo.requestFocus();
+			cod = -1;
+		} else {
+			cod = Integer.parseInt(txtCodigo.getText());
+		}
+		return cod;
+
+	}
+
+	protected void actionPerformedBtnEliminar(ActionEvent e) {
+		eliminarUsuario();
+	}
+
+	private void eliminarUsuario() {
+		// obtener código
+		int cod, opcion;
+		cod = getCodigo();
+		// validar
+		if (cod == -1) {
+			return;
+		} else {
+			// mensaje de confirmación parar eliminar
+			opcion = JOptionPane.showConfirmDialog(this, "Seguro de eliminar ? ", "Sistema", JOptionPane.YES_NO_OPTION);
+			if (opcion == 0) {// click yes!! SI desea ELIMINAR
+				// ejecutar el proceso ++> eliminar usuarios
+				int ok = gUser.eliminar(cod);
+				// validar el resultado del proceso
+				if (ok == 0) {
+					mensajeError("Código no existe");
+				} else {
+					mensajeExitoso("Usuario eliminado");
+				}
+			}
+		}
+	}
+}

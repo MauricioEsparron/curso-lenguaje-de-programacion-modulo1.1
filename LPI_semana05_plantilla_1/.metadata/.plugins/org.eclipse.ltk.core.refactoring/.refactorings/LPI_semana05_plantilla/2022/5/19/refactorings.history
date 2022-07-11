@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename method &apos;interfaces.UsuarioInterfacesDAO.actualizaar(...)&apos; to &apos;actualizar&apos;&#x0D;&#x0A;- Original project: &apos;LPI_semana05_plantilla&apos;&#x0D;&#x0A;- Original element: &apos;interfaces.UsuarioInterfacesDAO.actualizaar(...)&apos;&#x0D;&#x0A;- Renamed element: &apos;interfaces.UsuarioInterfacesDAO.actualizar(...)&apos;&#x0D;&#x0A;- Update references to refactored element" delegate="false" deprecate="false" description="Rename method &apos;actualizaar&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.method" input="/src&lt;interfaces{UsuarioInterfacesDAO.java[UsuarioInterfacesDAO~actualizaar~QUsuario;" name="actualizar" references="true" stamp="1651593067709" version="1.0"/>
+</session>

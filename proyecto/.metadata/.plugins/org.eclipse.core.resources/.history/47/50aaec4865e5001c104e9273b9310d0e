@@ -1,0 +1,131 @@
+package mantenimiento;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import entidad.Tarjeta;
+import interfaces.TarjetaInrterfacesDAO;
+import utils.MySQLConexion8;
+
+public class GestionTarjetaDAO implements TarjetaInrterfacesDAO {
+
+	@Override
+	public int registrar(Tarjeta t) {
+
+		int res = 0;
+		Connection con = null;
+		PreparedStatement pstm = null;
+		try {
+
+			con = MySQLConexion8.getConexion();
+			String sql = "insert into tb_tarjeta values(?,?, default,?,?,?,?);";
+			pstm = con.prepareStatement(sql);
+
+			pstm.setInt(1, t.getNum_Tarjeta());
+			pstm.setInt(2, t.getCod_cliente());
+			pstm.setInt(3, t.getCod_cuenta());
+			pstm.setInt(4, t.getNum_cuenta());
+			pstm.setString(5, t.getFecAfliacion());
+			pstm.setString(6, t.getFecCaducidad());
+			pstm.setDouble(7, t.getSaldo());
+
+			res = pstm.executeUpdate();
+
+		} catch (Exception e) {
+			System.out.println(">>>>>> Error en la instrucción SQL - Registrar" + e.getMessage());
+		} finally {
+			try {
+				if (pstm != null)
+					pstm.close();
+				if (con != null)
+					con.close();
+
+			} catch (SQLException e2) {
+				System.out.println("Error al cerrar la base de datos " + e2.getMessage());
+			}
+		}
+
+		return res;
+
+	}
+
+	@Override
+	public int actualizar(Tarjeta t) {
+		int res = 0;
+		Connection con = null;
+		PreparedStatement pstm = null;
+		try {
+
+			con = MySQLConexion8.getConexion();
+			String sql = "insert into tb_tarjeta values(?,?, default,?,?,?,?);";
+			pstm = con.prepareStatement(sql);
+
+			pstm.setInt(1, t.getNum_Tarjeta());
+			pstm.setInt(2, t.getCod_cliente());
+			pstm.setInt(3, t.getCod_cuenta());
+			pstm.setInt(4, t.getNum_cuenta());
+			pstm.setString(5, t.getFecAfliacion());
+			pstm.setString(6, t.getFecCaducidad());
+			pstm.setDouble(7, t.getSaldo());
+
+			res = pstm.executeUpdate();
+
+		} catch (Exception e) {
+			System.out.println(">>>>>> Error en la instrucción SQL - Registrar" + e.getMessage());
+		} finally {
+			try {
+				if (pstm != null)
+					pstm.close();
+				if (con != null)
+					con.close();
+
+			} catch (SQLException e2) {
+				System.out.println("Error al cerrar la base de datos " + e2.getMessage());
+			}
+		}
+
+		return res;
+	}
+
+	@Override
+	public int eliminar(int num_Tarjeta) {
+		int res = 0;
+		Connection con = null;
+		PreparedStatement pstm = null;
+		try {
+
+			con = MySQLConexion8.getConexion();
+
+			String sql = "delete from tb_tarjeta where numtb_tarjeta = ?";
+
+			pstm = con.prepareStatement(sql);
+
+			pstm.setInt(1, num_Tarjeta);
+
+			res = pstm.executeUpdate();
+
+		} catch (Exception e) {
+			System.out.println(">>>>>>Error en la instruccion SQL - Eliminar " + e.getMessage());
+		} finally {
+			try {
+				if (pstm != null)
+					pstm.close();
+				if (pstm != null)
+					con.close();
+			} catch (Exception e2) {
+				System.out.println("Error al cerrar la base de datos " + e2.getMessage());
+			}
+		}
+		return res;
+	}
+
+	@Override
+	public ArrayList<Tarjeta> listartarjeta() {
+		ArrayList<Tarjeta> lista = new ArrayList<Tarjeta>();
+
+		return null;
+	}
+
+}

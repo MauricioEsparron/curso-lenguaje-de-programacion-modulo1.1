@@ -1,0 +1,159 @@
+package vista;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import utils.HiloReloj;
+
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.ImageIcon;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.KeyStroke;
+import javax.swing.UIManager;
+
+import java.awt.event.KeyEvent;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.awt.event.InputEvent;
+import javax.swing.JDesktopPane;
+import java.awt.SystemColor;
+import javax.swing.JLabel;
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.SwingConstants;
+
+public class FrmPrincipal extends JFrame implements ActionListener {
+
+	private JPanel contentPane;
+	private JMenuBar menuBar;
+	private JMenu mnSistema;
+	private JMenu mnMantenimiento;
+	private JMenuItem mntmCliente;
+	private JMenuItem mntmSalir;
+	private JMenuItem mntmProductos;
+	private JMenu mnReportes;
+	private JMenuItem mntmReporteClientes;
+	private JMenuItem mntmVentas;
+	private JDesktopPane escritorio;
+	public static JLabel lblReloj;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					FrmPrincipal frame = new FrmPrincipal();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public FrmPrincipal() {
+		//apariencia 
+		try {
+			UIManager.setLookAndFeel( "com.jtattoo.plaf.graphite.GraphiteLookAndFeel" );
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 757, 457);
+		
+		menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		mnSistema = new JMenu("Sistema");
+		mnSistema.setMnemonic('S');
+		mnSistema.setIcon(new ImageIcon(FrmPrincipal.class.getResource("/img/3069182_device_business_computer_technology_office_icon (5).png")));
+		menuBar.add(mnSistema);
+		
+		mntmSalir = new JMenuItem("Salir");
+		mntmSalir.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F5, InputEvent.ALT_MASK));
+		mntmSalir.addActionListener(this);
+		mntmSalir.setIcon(new ImageIcon(FrmPrincipal.class.getResource("/img/353434_power_switch_off_on_icon (1).png")));
+		mnSistema.add(mntmSalir);
+		
+		mnMantenimiento = new JMenu("Mantenimiento");
+		mnMantenimiento.setMnemonic('M');
+		mnMantenimiento.setIcon(new ImageIcon(FrmPrincipal.class.getResource("/img/3668839_gear_maintenance_service_icon (2).png")));
+		menuBar.add(mnMantenimiento);
+		
+		mntmCliente = new JMenuItem("Clientes");
+		mntmCliente.setIcon(new ImageIcon(FrmPrincipal.class.getResource("/img/1564535_customer_user_userphoto_account_person_icon (2).png")));
+		mnMantenimiento.add(mntmCliente);
+		
+		mntmProductos = new JMenuItem("Productos");
+		mntmProductos.addActionListener(this);
+		mntmProductos.setIcon(new ImageIcon(FrmPrincipal.class.getResource("/img/4172394_goods_merchandise_stock_supply_vendibles_icon (3).png")));
+		mnMantenimiento.add(mntmProductos);
+		
+		mnReportes = new JMenu("Reportes");
+		mnReportes.setMnemonic('R');
+		mnReportes.setIcon(new ImageIcon(FrmPrincipal.class.getResource("/img/2530827_general_inkjet printer_office_paper printer_print_icon (2).png")));
+		menuBar.add(mnReportes);
+		
+		mntmReporteClientes = new JMenuItem("Clientes");
+		mntmReporteClientes.setIcon(new ImageIcon(FrmPrincipal.class.getResource("/img/49615_reports_report_documents_icon (1).png")));
+		mnReportes.add(mntmReporteClientes);
+		
+		mntmVentas = new JMenuItem("Ventas");
+		mntmVentas.setIcon(new ImageIcon(FrmPrincipal.class.getResource("/img/8960618_reports_checkup_clipboard_hospital_doctor_icon.png")));
+		mnReportes.add(mntmVentas);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
+		
+		escritorio = new JDesktopPane();
+		escritorio.setBackground(SystemColor.textHighlight);
+		contentPane.add(escritorio, BorderLayout.CENTER);
+		
+		lblReloj = new JLabel("00:00:00");
+		lblReloj.setHorizontalAlignment(SwingConstants.CENTER);
+		lblReloj.setFont(new Font("Tempus Sans ITC", Font.BOLD, 20));
+		lblReloj.setForeground(Color.WHITE);
+		lblReloj.setBounds(543, 28, 148, 29);
+		escritorio.add(lblReloj);
+		mostrarReloj();
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == mntmProductos) {
+			actionPerformedMntmProductos(e);
+		}
+		if (e.getSource() == mntmSalir) {
+			actionPerformedMntmSalir(e);
+		}
+	}
+	protected void actionPerformedMntmSalir(ActionEvent e) {
+		//cerrar la aplicaci�n
+		System.exit(0);
+	}
+	protected void actionPerformedMntmProductos(ActionEvent e) {
+		//intanciar un objeto
+		FrmRegProd prod = new FrmRegProd();
+		prod.setVisible(true);
+		escritorio.add(prod);
+	}
+	
+	private void mostrarReloj() {
+		//llamar al proceso
+		HiloReloj h = new HiloReloj();
+		//iniciar proceso
+		h.start();
+	}
+}

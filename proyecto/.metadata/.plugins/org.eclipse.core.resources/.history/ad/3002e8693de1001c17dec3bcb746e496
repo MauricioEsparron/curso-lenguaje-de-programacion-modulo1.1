@@ -1,0 +1,26 @@
+package hilos;
+
+import vista.Logueo;
+
+public class HiloTiempo extends Thread{
+	@Override
+	public void run() {
+		for (int i = 10; i >= 0; i--) {
+			//asignar el valor a la etiqueta
+			Logueo.lblTiempo.setText(i +"s");
+			//prueba
+			//System.out.println(i);
+			//pausa
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				System.out.println("Error en el conteo" +e);
+			}
+		}
+		//cerrar ventas
+		//System.exit(0); //observaci�n ?????
+		//correcto
+		Logueo.frame.dispose();
+	}
+
+}

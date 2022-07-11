@@ -1,0 +1,8 @@
+package mantenimiento;
+
+import interfaces.MovimientoInterfacesDAO;
+
+public class GestionMovimientoDAO implements MovimientoInterfacesDAO {
+
+}
+ 

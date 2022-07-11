@@ -1,0 +1,22 @@
+package utils;
+
+public class GeneradorDeNumeros {
+
+	public static void main(String[] args) {
+
+		
+		int n;
+		
+		do {
+			n = aleatorio();
+		}
+	
+		// Genera y retorna un número aleatorio de dos cifras
+	
+		
+	}
+
+	static int aleatorio() {
+		return (int) ((99 - 10 + 1) * Math.random() + 10);
+	}
+}

@@ -1,0 +1,17 @@
+package utils;
+
+import java.util.Random;
+
+public class GeneradorDeNumeros {
+
+	public static int main(String[] args) {
+
+
+			  return (int)(100000 * Math.random());
+			
+		
+		
+		
+	}
+
+}

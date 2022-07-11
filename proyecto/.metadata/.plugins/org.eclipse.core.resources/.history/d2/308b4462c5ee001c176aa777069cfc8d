@@ -1,0 +1,29 @@
+package entidad;
+
+import java.awt.Graphics;
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+
+public class Panel extends JPanel {
+
+	private Image fondo;
+
+	public Panel() {
+		preInit();
+		initCoponents();
+	}
+
+	private void initCoponents() {
+
+	}
+
+	private void preInit() {
+		fondo = new ImageIcon("imagenFondo.jpg").getImage();
+	}
+
+	public void paint(Graphics g) {
+		g.drawImage(fondo, 0, 0, getWidth());
+	}
+}

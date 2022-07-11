@@ -1,0 +1,68 @@
+package manejoString;
+
+public class EjemploString {
+
+	public static void main(String[] args) {
+
+		String texto = "a001;  Juancito ;  Pando  ;12;05;LP1";
+
+		// Separar los textos en código, nombre, apellido, nota1, nota2 y curso
+
+		// *asignar valores a una variable
+
+		String separador[] = texto.split(";");
+		for (String palab : separador) {
+			System.out.print(palab);
+
+			String nomb = separador[0];
+			String cod = separador[1];
+			String ape = separador[2];
+			int nota1 = Integer.parseInt(separador[3]);
+			int nota2 = Integer.parseInt(separador[4]);
+			String curso = separador[5].trim();
+			// bucle para el recorrido
+			for (String s : separador) {
+				System.out.println(s.trim());
+			}
+
+			// Convertir el apellido a mayúscula y el nombre el minúscula
+
+			System.out.println("Apellidos : " + ape.toUpperCase());
+			System.out.println("Nombre : " + nomb.toLowerCase());
+
+			// Validar que el curso sea LP1
+			if (curso.equalsIgnoreCase("LP1")) {
+				System.out.println("curso correcto : " + curso);
+			} else {
+				System.out.println("Error en el curso");
+			}
+
+			// Validar que el código empiece con la letras “a” o “p”
+
+			if (cod.startsWith("a") || cod.startsWith("p")) {
+				System.out.println("código correcto");
+			} else {
+				System.out.println("código no válido");
+			}
+
+			// validar que el tamaño del código sea 4
+
+			if (cod.length() == 4) {
+				System.out.println("código no valido");
+			} else {
+				System.out.println("Error en el formato de código");
+			}
+
+			// Generar un correo con el siguiente formato: 1° letra del nombre + parte
+			// numérica del código + @cibertec.pe. Ej. j001@cibertec.pe
+
+			char primerComponente = nomb.charAt(0);
+			String segundoComponente = cod.substring(1);
+			System.out.println(primerComponente + segundoComponente + "@cibertec.pe");
+
+			// Mostrar los datos
+
+		}
+
+	}
+}

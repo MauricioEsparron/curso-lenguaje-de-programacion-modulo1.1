@@ -1,0 +1,14 @@
+package mantenimiento;
+
+import entidad.Cliente;
+import interfaces.ClienteInterfacesDAO;
+
+public class GestionClienteDAO implements ClienteInterfacesDAO {
+
+	@Override
+	public int registrar(Cliente c) {
+		
+		return 0;
+	}
+
+}

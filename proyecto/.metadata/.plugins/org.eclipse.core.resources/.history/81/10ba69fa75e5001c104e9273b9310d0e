@@ -1,0 +1,60 @@
+package mantenimiento;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+
+import entidad.TipoCuenta;
+import interfaces.TipoCuentaInterfacesDAO;
+import utils.MySQLConexion8;
+
+public class GestionTipoCuentaDAO implements TipoCuentaInterfacesDAO {
+
+	@Override
+	public ArrayList<TipoCuenta> listaTipoCuenta() {
+
+		ArrayList<TipoCuenta> lista = new ArrayList<TipoCuenta>();
+		TipoCuenta tipo;
+		Connection con = null;
+		PreparedStatement pstm = null;
+		ResultSet res = null;
+
+		try {
+
+			con = MySQLConexion8.getConexion();
+			String sql = "SELECT *FROM FROM bd_banca.tb_tipocuenta";
+
+			pstm = con.prepareStatement(sql);
+
+			res = pstm.executeQuery();
+
+			while (res.next()) {
+
+				tipo = new TipoCuenta();
+
+				tipo.setCod_cuenta(res.getInt(1));
+				tipo.setDescripcion(res.getString(2));
+
+				lista.add(tipo);
+
+			}
+
+		} catch (Exception e) {
+			System.out.println(">>>>>>Error en la instruccion SQL - Consultar " + e.getMessage());
+		} finally {
+			try {
+				if (pstm != null)
+					pstm.close();
+				if (pstm != null)
+					con.close();
+				if (pstm != null)
+					res.close();
+			} catch (Exception e2) {
+				System.out.println("Error al cerrar la base de datos " + e2.getMessage());
+			}
+		}
+		return lista;
+	}
+
+}

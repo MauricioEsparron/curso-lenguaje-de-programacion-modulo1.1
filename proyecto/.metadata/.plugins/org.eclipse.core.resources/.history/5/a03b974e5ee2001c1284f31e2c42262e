@@ -1,0 +1,39 @@
+package mantenimiento;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+import entidad.Cliente;
+import interfaces.ClienteInterfacesDAO;
+import utils.MySQLConexion8;
+
+public class GestionClienteDAO implements ClienteInterfacesDAO {
+
+	@Override
+	public int registrar(Cliente c) {
+
+		int res = 0;
+		Connection con = null;
+		PreparedStatement pstm = null;
+		try {
+
+			con = MySQLConexion8.getConexion();
+			String sql = "insert into tb_cliente values (null,'nombre','apellido','dni','telefono');
+
+		} catch (Exception e) {
+			System.out.println("Error en la instruccion SQL - Registrar " + e.getMessage());
+		}
+		return res;
+	}
+
+	@Override
+	public int actualizar(Cliente c) {
+		return 0;
+	}
+
+	@Override
+	public int eliminar(int codigoCliente) {
+		return 0;
+	}
+
+}

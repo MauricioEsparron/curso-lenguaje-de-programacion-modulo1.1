@@ -1,0 +1,33 @@
+package utils;
+
+import java.util.Random;
+
+public class GeneradorDeNumeros {
+
+	public static void main(String[] args) {
+
+
+		//Result Donde guardo el Resultado Length variable que indica el tamaño de mi numero.    
+		//Array donde guardo los randoms    
+		    int[] arrayRandom=new int[9];
+		//Variable donde genero numeros por separado    
+		    int pos;
+		//Variable donde eligo el Rango de Numeros     
+		    int nNums = 9;//En este caso del 1 al 9.
+	
+		        for (int i = 0; i < arrayRandom.length; i++) {
+		//Genero un numero random    
+		            pos = (int) Math.floor(Math.random() * nNums+1);
+		//Lo guardo en el array
+		            arrayRandom[i] = pos;
+		 
+		//Si la pila ya contiene el numero 
+		            while (pila.contains(pos)) {
+		//Vuelvo a generar un numero random  hasta que no se repita   
+		                pos = (int) Math.floor(Math.random() * nNums);
+		                arrayRandom[i] = pos;
+		            }
+		
+	}
+
+}

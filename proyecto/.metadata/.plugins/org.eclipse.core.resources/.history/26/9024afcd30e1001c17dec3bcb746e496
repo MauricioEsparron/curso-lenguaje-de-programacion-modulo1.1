@@ -1,0 +1,10 @@
+package hilos;
+
+public class HiloTiempo extends Thread {
+
+	@Override
+	public void run() {
+
+		super.run();
+	}
+}

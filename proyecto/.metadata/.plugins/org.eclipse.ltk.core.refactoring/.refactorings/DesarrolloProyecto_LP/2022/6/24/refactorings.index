@@ -1,0 +1,44 @@
+1654467366293	Delete element
+1654467582270	Delete element
+1654468561807	Delete element
+1654471702677	Delete element
+1654476618772	Copy compilation unit
+1654483965637	Rename method 'leerNombre'
+1654483978378	Rename method 'leerApellido'
+1654483987735	Rename method 'leerDni'
+1654483998234	Rename method 'leerTelefono'
+1654484017344	Rename method 'leerCodigoCliente'
+1654485853072	Rename type 'FrmCliente'
+1654485870542	Rename type 'FrmTarjeta'
+1654500627482	Rename type 'GestionTranaccionDAO'
+1654500666799	Rename type 'FrmPreLoader'
+1654500700332	Rename type 'FrmTransaccion'
+1654500719058	Rename type 'RegistroTransaccion'
+1654500739326	Rename type 'FrmGenerador'
+1654500758955	Rename type 'FrmGeneradorNumeros'
+1654504986828	Rename method 'leerCodigoCuenta'
+1654505008349	Rename field 'txtCodigoCuenta'
+1654508220017	Rename method 'leerNumeroTarjeta'
+1654508231424	Rename method 'leerCodigoCliente'
+1654508243052	Rename method 'leerCodigoTipoCuenta'
+1654508252610	Rename method 'leerNumeroCuenta'
+1654508276608	Rename method 'leerFechaAfiliacion'
+1654508286415	Rename method 'leerFechaCaducidad'
+1654508296864	Rename method 'leerSaldo'
+1654561004076	Delete element
+1654561193546	Delete element
+1654561221523	Copy compilation unit
+1654561409200	Rename method 'cargarDataTipoCuenta'
+1654562038854	Rename local variable 'codTipoCuenta'
+1654562075753	Rename local variable 'codTipoCuenta'
+1654562095925	Rename method 'getCodigoTipoCuenta'
+1654562105659	Rename local variable 'codTipoCuenta'
+1654562127554	Rename method 'actualizarCodigoTipoCuenta'
+1654562155222	Rename local variable 'codOperacion'
+1654562194872	Rename method 'eliminarCodTipoCuenta'
+1654562230387	Rename method 'listaTipooperacion'
+1654562352292	Rename local variable 'codTipoCuenta'
+1654562375927	Rename method 'cargarDataTipoOperación'
+1654565019785	Rename method 'mostraData'
+1654586066235	Rename field 'dcFechaCaducidad'
+1654590502471	Rename method 'mostratData'

@@ -1,0 +1,14 @@
+package utils;
+
+import java.util.Random;
+
+public class GeneradorDeNumeros {
+
+	public static void main(String[] args) {
+
+		Random aleatorio = new Random();
+
+		int num = (int) (Random.nextInt(999999999));
+	}
+
+}

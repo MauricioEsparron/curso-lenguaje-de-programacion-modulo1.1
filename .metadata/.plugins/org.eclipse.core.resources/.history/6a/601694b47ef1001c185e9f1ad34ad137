@@ -1,0 +1,214 @@
+package vista;
+
+import java.awt.BorderLayout;
+import java.awt.Desktop;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+
+import entidad.Usuario;
+import mantenimiento.GestionUsuarioDAO;
+
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.awt.event.ActionEvent;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
+
+public class FrmLstUsuarios extends JFrame {
+
+	private JPanel contentPane;
+	DefaultTableModel model = new DefaultTableModel();
+
+	GestionUsuarioDAO gUser = new GestionUsuarioDAO();
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					FrmLstUsuarios frame = new FrmLstUsuarios();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public FrmLstUsuarios() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+
+		JLabel lblTitulo = new JLabel("Listado de Usuarios");
+		lblTitulo.setBounds(22, 11, 183, 24);
+		contentPane.add(lblTitulo);
+
+		JButton btnListado = new JButton("Listado");
+		btnListado.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				// llamar al método
+				listado();
+			}
+		});
+		btnListado.setBounds(22, 227, 89, 23);
+		contentPane.add(btnListado);
+
+		JButton btnPdf = new JButton("PDF");
+		btnPdf.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				imprimePDF();
+			}
+		});
+		btnPdf.setBounds(121, 227, 89, 23);
+		contentPane.add(btnPdf);
+
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 48, 414, 173);
+		contentPane.add(scrollPane);
+
+		tblUsuarios = new JTable();
+		scrollPane.setViewportView(tblUsuarios);
+		tblUsuarios.setFillsViewportHeight(true);
+
+		model.addColumn("Código");
+		model.addColumn("Nombre");
+		model.addColumn("Apellido");
+		model.addColumn("Usuario");
+
+		tblUsuarios.setModel(model);
+	}
+
+	String fecha = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+	private JTable tblUsuarios;
+	private JScrollPane scrollPane;
+
+	void imprimePDF() {
+
+		// 1. Asignar un nombre al archivo pdf
+		String nombArchivo = "Reportes/listadoUsuarios.pdf";
+		try {
+			// 2. crear una plantilla
+			Document plantilla = new Document();
+			// 3. crear el archivo
+			FileOutputStream fos = new FileOutputStream(nombArchivo);
+			// 4. relacionar la plantilla con el archivo pdf creado
+			PdfWriter pdfWr = PdfWriter.getInstance(plantilla, fos);
+			// 5. abrir el documento a modo de escritura
+			plantilla.open();
+			// agregar un logo
+			Image img = Image.getInstance("src/img/logociberfarma.png");
+			img.scaleToFit(90, 90);
+			img.setAlignment(Chunk.ALIGN_RIGHT);
+
+			plantilla.add(img);
+			// agregar titulo --> parrafo
+			Paragraph p = new Paragraph("Listado Usuarios",
+					FontFactory.getFont("arial", 22, Font.BOLD, BaseColor.BLUE));
+			p.setAlignment(Chunk.ALIGN_CENTER);
+			plantilla.add(p);
+			// agregar un espacio
+			p = new Paragraph(" ");
+			plantilla.add(p);
+
+			// llamar al proceso
+			ArrayList<Usuario> ListarUser = gUser.listarUsuarios();
+			if (ListarUser.size() == 0) {
+				p = new Paragraph("Lista vacía", FontFactory.getFont("arial", 14, Font.ITALIC, BaseColor.RED));
+			} else {
+				// crear tabla
+
+				PdfPTable tabla = new PdfPTable(5);
+				// encabezado de la tabla --> agregar las columnas
+				tabla.addCell("Código");
+				tabla.addCell("Nombre");
+				tabla.addCell("Apellido");
+				tabla.addCell("Usuario");
+				tabla.addCell("Foto");
+
+				// recorrido
+				for (Usuario u : ListarUser) {
+					// cargar la imagen
+					if (new File("src/img/f" + u.getCodigo() + ".png").exists()) {
+						img = Image.getInstance("src/img/f" + u.getCodigo() + ".png");
+					} else {
+						img = Image.getInstance("src/img/user.png");
+					}
+
+					tabla.addCell(u.getCodigo() + " ");
+					tabla.addCell(u.getNombre());
+					tabla.addCell(u.getApellido());
+					tabla.addCell(u.getUsuario());
+					tabla.addCell(img);
+				}
+				plantilla.add(tabla);
+			}
+
+			// cerrar el documento
+			Image firma = Image.getInstance("src/img/firma-gerente.png");
+			firma.scaleToFit(90, 90);
+			firma.setAlignment(Chunk.ALIGN_RIGHT);
+			plantilla.add(firma);
+			plantilla.close();
+
+			// mostrar el archivo pdf
+
+			Desktop.getDesktop().open(new File(nombArchivo));
+
+		} catch (
+
+		Exception e) {
+			System.out.println("Error al generar reporte" + e.getMessage());
+		}
+	}
+
+	void listado() {
+		// 1. limpiar la tabla
+		model.setRowCount(0);
+		// 2. llamar proceso --> Listar Usuario
+		ArrayList<Usuario> ListarUser = gUser.listarUsuarios();
+		if (ListarUser.size() == 0) {
+			mensajeError("Lista vacía");
+		} else {
+			for (Usuario u : ListarUser) {
+				Object fila[] = { u.getCodigo(), u.getNombre(), u.getApellido(), u.getUsuario() };
+				model.addRow(fila);
+			}
+		}
+
+	}
+
+	private void mensajeError(String msj) {
+		JOptionPane.showMessageDialog(this, msj, "ERROR", 0);
+	}
+}

@@ -1,0 +1,61 @@
+package mantenimiento;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+import entidad.Movimiento;
+import interfaces.MovimientoInterfacesDAO;
+import utils.MySQLConexion8;
+
+public class GestionMovimientoDAO implements MovimientoInterfacesDAO {
+
+	@Override
+	public int registrar(Movimiento m) {
+
+		int res = 0;
+		Connection con = null;
+		PreparedStatement pstm = null;
+		try {
+
+			con = MySQLConexion8.getConexion();
+			String sql = "insert into tb_cliente values (null,?,?,?,?)";
+
+			pstm = con.prepareStatement(sql);
+
+			pstm.setInt(1, m.getCod_movimiento());
+			pstm.setInt(2, m.getNum_tarjeta());
+			pstm.setInt(3, m.getCod_cliente());
+			pstm.setInt(4, m.getNum_cuenta());
+			pstm.setInt(5, m.getCod_operacion());
+			pstm.setString(6, m.getFecha_movimiento());
+			pstm.setInt(7, m.getCuenta_destino());
+			pstm.setDouble(7, m.getMonto());
+
+			res = pstm.executeUpdate();
+
+		} catch (Exception e) {
+			System.out.println(">>>>>>Error en la instruccion SQL - Registrar " + e.getMessage());
+		} finally {
+			try {
+				if (pstm != null)
+					pstm.close();
+				if (pstm != null)
+					con.close();
+			} catch (Exception e2) {
+				System.out.println("Error al cerrar la base de datos " + e2.getMessage());
+			}
+		}
+		return res;
+	}
+
+	@Override
+	public int actualizar(Movimiento m) {
+		return 0;
+	}
+
+	@Override
+	public int eliminar(int codigoMovimiento) {
+		return 0;
+	}
+
+}

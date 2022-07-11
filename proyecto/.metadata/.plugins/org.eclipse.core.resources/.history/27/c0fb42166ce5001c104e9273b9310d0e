@@ -1,0 +1,20 @@
+package mantenimiento;
+
+import java.sql.Connection;
+import java.util.ArrayList;
+
+import entidad.TipoCuenta;
+import interfaces.TipoCuentaInterfacesDAO;
+
+public class GestionTipoCuentaDAO implements TipoCuentaInterfacesDAO {
+
+	@Override
+	public ArrayList<TipoCuenta> listaTipoCuenta() {
+
+		ArrayList<TipoCuenta> lista = new ArrayList<TipoCuenta>();
+		Connection con = null;
+
+		return lista;
+	}
+
+}

@@ -1,0 +1,7 @@
+INDEX VERSION 1.131+C:\Users\mauri\OneDrive\Documentos\CICLO 3\LENGUAJE DE PROGRAMACION I\RESUELTOS\proyecto\.metadata\.plugins\org.eclipse.jdt.core
+2751738652.index
+1865797976.index
+361248887.index
+2228456513.index
+1539528379.index
+406806445.index

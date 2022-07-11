@@ -1,0 +1,26 @@
+package mantenimiento;
+
+import entidad.Cliente;
+import interfaces.ClienteInterfacesDAO;
+
+public class GestionClienteDAO implements ClienteInterfacesDAO {
+
+	@Override
+	public int registrar(Cliente c) {
+
+		return 0;
+	}
+
+	@Override
+	public int actualizar(Cliente c) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int eliminar(Cliente c) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

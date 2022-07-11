@@ -1,0 +1,14 @@
+package utils;
+
+import java.util.Random;
+
+public class GeneradorDeNumeros {
+
+	public static void main(String[] args) {
+
+		
+	Random dado = new Random();
+	
+	int numero
+	}
+}

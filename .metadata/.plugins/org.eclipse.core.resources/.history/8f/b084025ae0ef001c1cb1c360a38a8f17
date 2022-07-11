@@ -1,0 +1,14 @@
+package utils;
+
+public class Validaciones {
+	
+	public static final String CODIGO_PRODUCTO = "[Pp]\\d{4}";//P0001 p0001 
+	public static final String DNI = "\\d{8}"; // 47853206
+	public static final String TEXTO = "[a-zA-Z\\s]{3,15}";
+	public static final String NOMBRE = "[a-zA-Z] {3,15}";
+	public static final String APELLIDO = "[a-zA-Z] {2,25}";
+	
+	public static final String COD_PRODUCTO = "[Pp]{1}[0-9]{4}";
+	
+
+}

@@ -1,0 +1,13 @@
+package interfaces;
+
+import entidad.Tarjeta;
+
+public interface TarjetaInrterfacesDAO {
+		
+	public int registrar(Tarjeta t);
+	
+	
+	
+	
+
+}

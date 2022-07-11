@@ -1,0 +1,38 @@
+package mantenimiento;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+
+import entidad.TipoOperacion;
+import interfaces.TipoOperacionInterfacesDAO;
+import utils.MySQLConexion8;
+
+public class GestionTipoOperacionDAO implements TipoOperacionInterfacesDAO {
+
+	@Override
+	public int registrar(TipoOperacion to) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int actualizar(TipoOperacion to) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int eliminar(int codOperacion) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public ArrayList<TipoOperacion> listaTipooperacion() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

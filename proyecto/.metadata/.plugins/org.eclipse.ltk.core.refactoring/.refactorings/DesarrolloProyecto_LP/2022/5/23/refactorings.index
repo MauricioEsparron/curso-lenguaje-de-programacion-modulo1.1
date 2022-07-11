@@ -1,0 +1,19 @@
+1653960132451	Rename type 'Usuario'
+1653962873814	Rename type 'VentanaConFondo'
+1653963446083	Delete element
+1653963449723	Delete element
+1653963716012	Rename type 'FrmCuenta'
+1653963726969	Rename type 'Cuenta'
+1653964687179	Move compilation unit
+1653964698145	Rename type 'FrmCuenta'
+1653967009412	Delete element
+1653967023053	Delete element
+1653971012480	Rename field 'cod'
+1653971033324	Rename local variable 'cod'
+1653971046292	Rename local variable 'cod'
+1653973721746	Rename method 'actionPerformedMntmCuenta'
+1653980922839	Delete element
+1654035928441	Rename type 'Hilos'
+1654035932532	Move compilation unit
+1654040992273	Delete element
+1654041013021	Delete element

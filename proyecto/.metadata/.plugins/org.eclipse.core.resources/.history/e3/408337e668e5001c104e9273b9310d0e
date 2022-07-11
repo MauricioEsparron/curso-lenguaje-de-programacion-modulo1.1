@@ -1,0 +1,9 @@
+package entidad;
+
+public class TipoCuenta {
+
+	private int cod_cuenta;
+	private String descripcion;
+	
+	
+}

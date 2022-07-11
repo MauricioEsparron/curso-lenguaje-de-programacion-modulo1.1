@@ -1,0 +1,13 @@
+package utils;
+
+public class GeneradorDeNumeros {
+
+	public static void main(String[] args) {
+
+		int aleatorio = 0;
+
+		aleatorio = Math.random() * 100;
+
+	}
+
+}

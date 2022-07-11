@@ -1,0 +1,9 @@
+package utils;
+
+public class GeneradorDeNumeros {
+
+	public static void main(String[] args) {
+
+	}
+
+}

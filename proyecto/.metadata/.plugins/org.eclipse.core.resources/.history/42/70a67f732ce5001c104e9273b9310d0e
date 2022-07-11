@@ -1,0 +1,36 @@
+package mantenimiento;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+import entidad.Tarjeta;
+import interfaces.TarjetaInrterfacesDAO;
+
+public class GestionTarjetaDAO implements TarjetaInrterfacesDAO {
+
+	@Override
+	public int registrar(Tarjeta t) {
+
+		int res = 0;
+		Connection con = null;
+		PreparedStatement pstm = null;
+		try {
+
+		} catch (Exception e) {
+			System.out.println(">>>>>>Error en la instrucción SQL - Registrar" + e.getMessage());
+		}
+
+		return res;
+	}
+
+	@Override
+	public int actualizar(Tarjeta t) {
+		return 0;
+	}
+
+	@Override
+	public int eliminar(int num_Tarjeta) {
+		return 0;
+	}
+
+}

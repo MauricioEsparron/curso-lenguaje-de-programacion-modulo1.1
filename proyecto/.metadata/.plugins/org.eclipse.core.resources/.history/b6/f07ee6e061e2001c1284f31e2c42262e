@@ -1,0 +1,468 @@
+package vista;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+import utils.Validaciones;
+
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
+import javax.swing.JButton;
+import javax.swing.ImageIcon;
+import java.awt.Font;
+import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
+
+public class FrmCliente extends JInternalFrame implements ActionListener, KeyListener {
+
+	private JPanel contentPane;
+	private JLabel lblCodigoCliente;
+	private JLabel lblnombreCliente;
+	private JLabel lblApellidoCliente;
+	private JLabel lblDniCliente;
+	private JLabel lblTelefonoCliente;
+	private JTextField txtCodigoCliente;
+	private JTextField txtNombreCliente;
+	private JTextField txtApellidoCliente;
+	private JTextField txtDniCliente;
+	private JTextField txtTelefonoCliente;
+	private JTable tblCliente;
+	private JScrollPane scrollPane;
+	private JButton btnNuevo;
+	private JButton btnGuardar;
+	private JButton btnEditar;
+	private JButton btnConsultar;
+
+	DefaultTableModel model = new DefaultTableModel();
+	private JLabel lblNewLabel;
+	private JLabel lblCodAyuda;
+	private JButton btnCodAyuda;
+	private JButton btnCodAyuda_1;
+	private JButton btnCodAyuda_2;
+	private JButton btnCodAyuda_3;
+	private JButton btnCodAyuda_4;
+	private JLabel lblNombAyuda;
+	private JLabel lblApeAyuda;
+	private JLabel lblDniAyuda;
+	private JLabel lblTelefAyuda;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					FrmCliente frame = new FrmCliente();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public FrmCliente() {
+		setClosable(true);
+		setIconifiable(true);
+		setMaximizable(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 561, 469);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+
+		lblCodigoCliente = new JLabel("Codigo :");
+		lblCodigoCliente.setBounds(10, 71, 62, 14);
+		contentPane.add(lblCodigoCliente);
+
+		lblnombreCliente = new JLabel("Nombre :");
+		lblnombreCliente.setBounds(10, 96, 62, 14);
+		contentPane.add(lblnombreCliente);
+
+		lblApellidoCliente = new JLabel("Apellido :");
+		lblApellidoCliente.setBounds(10, 121, 62, 14);
+		contentPane.add(lblApellidoCliente);
+
+		lblDniCliente = new JLabel("Dni :");
+		lblDniCliente.setBounds(10, 146, 62, 14);
+		contentPane.add(lblDniCliente);
+
+		lblTelefonoCliente = new JLabel("Telefono :");
+		lblTelefonoCliente.setBounds(10, 171, 62, 14);
+		contentPane.add(lblTelefonoCliente);
+
+		txtCodigoCliente = new JTextField();
+		txtCodigoCliente.setEnabled(false);
+		txtCodigoCliente.addKeyListener(this);
+		txtCodigoCliente.setBounds(101, 68, 86, 20);
+		contentPane.add(txtCodigoCliente);
+		txtCodigoCliente.setColumns(10);
+
+		txtNombreCliente = new JTextField();
+		txtNombreCliente.addKeyListener(this);
+		txtNombreCliente.setBounds(101, 93, 131, 20);
+		contentPane.add(txtNombreCliente);
+		txtNombreCliente.setColumns(10);
+
+		txtApellidoCliente = new JTextField();
+		txtApellidoCliente.addKeyListener(this);
+		txtApellidoCliente.setBounds(101, 118, 131, 20);
+		contentPane.add(txtApellidoCliente);
+		txtApellidoCliente.setColumns(10);
+
+		txtDniCliente = new JTextField();
+		txtDniCliente.addKeyListener(this);
+		txtDniCliente.setBounds(101, 143, 86, 20);
+		contentPane.add(txtDniCliente);
+		txtDniCliente.setColumns(10);
+
+		txtTelefonoCliente = new JTextField();
+		txtTelefonoCliente.addKeyListener(this);
+		txtTelefonoCliente.setBounds(101, 168, 86, 20);
+		contentPane.add(txtTelefonoCliente);
+		txtTelefonoCliente.setColumns(10);
+
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 214, 525, 170);
+		contentPane.add(scrollPane);
+
+		tblCliente = new JTable();
+		tblCliente.setFillsViewportHeight(true);
+		scrollPane.setViewportView(tblCliente);
+
+		btnNuevo = new JButton("Nuevo");
+		btnNuevo.addActionListener(this);
+		btnNuevo.setIcon(new ImageIcon(FrmCliente.class.getResource("/img/370092_add_plus_create_new_icon.png")));
+		btnNuevo.setBounds(389, 56, 134, 34);
+		contentPane.add(btnNuevo);
+
+		btnGuardar = new JButton("Guardar");
+		btnGuardar.addActionListener(this);
+		btnGuardar.setIcon(
+				new ImageIcon(FrmCliente.class.getResource("/img/7351060_bookmark_favorite_star_save_icon.png")));
+		btnGuardar.setBounds(389, 101, 134, 34);
+		contentPane.add(btnGuardar);
+
+		btnEditar = new JButton("Editar");
+		btnEditar.setIcon(new ImageIcon(
+				FrmCliente.class.getResource("/img/1976055_edit_edit document_edit file_edited_editing_icon.png")));
+		btnEditar.setBounds(389, 142, 134, 34);
+		contentPane.add(btnEditar);
+
+		btnConsultar = new JButton("Consular");
+		btnConsultar.setBounds(226, 396, 89, 23);
+		contentPane.add(btnConsultar);
+
+		model.addColumn("Nombre");
+		model.addColumn("Apellido");
+		model.addColumn("Dni");
+		model.addColumn("Telefono");
+
+		tblCliente.setModel(model);
+
+		lblNewLabel = new JLabel("Mantenimiento Cliente");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel.setBounds(10, 24, 222, 14);
+		contentPane.add(lblNewLabel);
+
+		lblCodAyuda = new JLabel("Autogenerable  ");
+		lblCodAyuda.setBounds(226, 71, 153, 14);
+		lblCodAyuda.setVisible(false);
+		contentPane.add(lblCodAyuda);
+
+		lblNombAyuda = new JLabel("(3 a 15 digitos)");
+		lblNombAyuda.setBounds(281, 96, 98, 14);
+		lblNombAyuda.setVisible(false);
+		contentPane.add(lblNombAyuda);
+
+		lblApeAyuda = new JLabel("(3 a 15 digitos)");
+		lblApeAyuda.setBounds(281, 121, 98, 14);
+		lblApeAyuda.setVisible(false);
+		contentPane.add(lblApeAyuda);
+
+		lblDniAyuda = new JLabel("(8 digitos)");
+		lblDniAyuda.setBounds(237, 146, 98, 14);
+		lblDniAyuda.setVisible(false);
+		contentPane.add(lblDniAyuda);
+
+		lblTelefAyuda = new JLabel("(9 digitos)");
+		lblTelefAyuda.setBounds(236, 171, 121, 14);
+		lblTelefAyuda.setVisible(false);
+		contentPane.add(lblTelefAyuda);
+
+		btnCodAyuda = new JButton("...");
+		btnCodAyuda.setFont(new Font("Tahoma", Font.BOLD, 10));
+		btnCodAyuda.addActionListener(this);
+		btnCodAyuda.setEnabled(true);
+		btnCodAyuda.setBounds(191, 67, 29, 23);
+		contentPane.add(btnCodAyuda);
+
+		btnCodAyuda_1 = new JButton("...");
+		btnCodAyuda_1.addActionListener(this);
+		btnCodAyuda_1.setFont(new Font("Tahoma", Font.BOLD, 10));
+		btnCodAyuda_1.setEnabled(true);
+		btnCodAyuda_1.setBounds(242, 92, 29, 23);
+		contentPane.add(btnCodAyuda_1);
+
+		btnCodAyuda_2 = new JButton("...");
+		btnCodAyuda_2.addActionListener(this);
+		btnCodAyuda_2.setFont(new Font("Tahoma", Font.BOLD, 10));
+		btnCodAyuda_2.setEnabled(true);
+		btnCodAyuda_2.setBounds(242, 117, 29, 23);
+		contentPane.add(btnCodAyuda_2);
+
+		btnCodAyuda_3 = new JButton("...");
+		btnCodAyuda_3.addActionListener(this);
+		btnCodAyuda_3.setFont(new Font("Tahoma", Font.BOLD, 10));
+		btnCodAyuda_3.setEnabled(true);
+		btnCodAyuda_3.setBounds(197, 142, 29, 23);
+		contentPane.add(btnCodAyuda_3);
+
+		btnCodAyuda_4 = new JButton("...");
+		btnCodAyuda_4.addActionListener(this);
+		btnCodAyuda_4.setFont(new Font("Tahoma", Font.BOLD, 10));
+		btnCodAyuda_4.setEnabled(true);
+		btnCodAyuda_4.setBounds(197, 167, 29, 23);
+		contentPane.add(btnCodAyuda_4);
+
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnCodAyuda_4) {
+			actionPerformedBtnCodAyuda_4(e);
+		}
+		if (e.getSource() == btnCodAyuda_3) {
+			actionPerformedBtnCodAyuda_3(e);
+		}
+		if (e.getSource() == btnCodAyuda_2) {
+			actionPerformedBtnCodAyuda_2(e);
+		}
+		if (e.getSource() == btnCodAyuda_1) {
+			actionPerformedBtnCodAyuda_1(e);
+		}
+		if (e.getSource() == btnCodAyuda) {
+			actionPerformedBtnCodAyuda(e);
+		}
+		if (e.getSource() == btnNuevo) {
+			actionPerformedBtnNuevo(e);
+		}
+		if (e.getSource() == btnGuardar) {
+			actionPerformedBtnGuardar(e);
+		}
+	}
+
+	protected void actionPerformedBtnGuardar(ActionEvent e) {
+		ingresar();
+//		txtCodigoCliente.setText("");
+//		txtNombreCliente.setText("");
+//		txtApellidoCliente.setText("");
+//		txtDniCliente.setText("");
+//		txtTelefonoCliente.setText("");
+	}
+
+	private void ingresar() {
+
+		int dni, telef;
+		String nomb, ape;
+
+		nomb = leerNombre();
+		ape = leerApellido();
+		dni = leerDni();
+		telef = leerTelefono();
+
+		if (nomb == null || ape == null || dni == -1 || telef == -1) {
+			return;
+		} else {
+			Object fila[] = { nomb, ape, dni, telef };
+			model.addRow(fila);
+		}
+
+	}
+
+	private int leerTelefono() {
+		int telef = -1;
+		if (txtTelefonoCliente.getText().trim().length() == -1) {
+			mensajeError("El campo es obligatorio, porfavor ingrese un Telefono");
+			txtTelefonoCliente.requestFocus();
+			txtTelefonoCliente.setBackground(Color.RED);
+			telef = -1;
+		} else if (txtTelefonoCliente.getText().trim().matches(Validaciones.TELEFONO)) {
+			telef = Integer.parseInt(txtTelefonoCliente.getText());
+		} else {
+			mensajeError("Ingreso de dats no válido. debe contener 9 caracteres");
+			txtTelefonoCliente.setText("");
+			txtTelefonoCliente.requestFocus();
+			txtTelefonoCliente.setBackground(Color.RED);
+			telef = -1;
+		}
+
+		return telef;
+	}
+
+	private int leerDni() {
+		int dni = -1;
+		if (txtDniCliente.getText().trim().length() == -1) {
+			mensajeError("El campo es obligatorio, porfavor ingrese un número de Dni");
+			txtDniCliente.requestFocus();
+			txtDniCliente.setBackground(Color.RED);
+			dni = -1;
+		} else if (txtDniCliente.getText().trim().matches(Validaciones.DNI)) {
+			dni = Integer.parseInt(txtDniCliente.getText());
+		} else {
+			mensajeError("Ingreso de dats no v�lido. debe contener 8 caracteres");
+			txtDniCliente.setText("");
+			txtDniCliente.requestFocus();
+			txtDniCliente.setBackground(Color.RED);
+			dni = -1;
+		}
+		return dni;
+	}
+
+	private String leerApellido() {
+		String ape = null;
+		if (txtApellidoCliente.getText().trim().length() == 0) {
+			mensajeError("El campo es obligatorio, porfavor ingrese un apellido");
+			txtApellidoCliente.requestFocus();
+			txtApellidoCliente.setBackground(Color.RED);
+			ape = null;
+		} else if (txtApellidoCliente.getText().trim().matches(Validaciones.APELLIDO)) {
+			ape = txtApellidoCliente.getText();
+		} else {
+			mensajeError("Debes ingresar un nombre que contenga de 3 a 15 caracteres");
+			txtApellidoCliente.setText("");
+			txtApellidoCliente.requestFocus();
+			txtApellidoCliente.setBackground(Color.RED);
+			ape = null;
+		}
+		return ape;
+	}
+
+	private String leerNombre() {
+		String nomb = null;
+		if (txtNombreCliente.getText().trim().length() == 0) {
+			mensajeError("El campo es obligatorio, porfavor ingrese un Nombre");
+			txtNombreCliente.requestFocus();
+			txtNombreCliente.setBackground(Color.RED);
+			nomb = null;
+		} else if (txtNombreCliente.getText().trim().matches(Validaciones.NOMBRE)) {
+			nomb = txtNombreCliente.getText();
+		} else {
+			mensajeError("Debes ingresar un nombre que contenga de 3 a 15 caracteres");
+			txtNombreCliente.setText("");
+			txtNombreCliente.requestFocus();
+			txtNombreCliente.setBackground(Color.RED);
+			nomb = null;
+		}
+		return nomb;
+	}
+
+	private void mensajeError(String msj) {
+		JOptionPane.showMessageDialog(this, msj, "Error !!!", 0);
+
+	}
+
+	public void keyPressed(KeyEvent e) {
+		if (e.getSource() == txtTelefonoCliente) {
+			keyPressedTxtTelefonoCliente(e);
+		}
+		if (e.getSource() == txtDniCliente) {
+			keyPressedTxtDniCliente(e);
+		}
+		if (e.getSource() == txtApellidoCliente) {
+			keyPressedTxtApellidoCliente(e);
+		}
+		if (e.getSource() == txtNombreCliente) {
+			keyPressedTxtNombreCliente(e);
+		}
+		if (e.getSource() == txtCodigoCliente) {
+			keyPressedTxtCodigoCliente(e);
+		}
+	}
+
+	public void keyReleased(KeyEvent e) {
+	}
+
+	public void keyTyped(KeyEvent e) {
+	}
+
+	protected void keyPressedTxtCodigoCliente(KeyEvent e) {
+		txtCodigoCliente.setBackground(Color.WHITE);
+		lblCodAyuda.setVisible(false);
+
+	}
+
+	protected void keyPressedTxtNombreCliente(KeyEvent e) {
+		txtNombreCliente.setBackground(Color.WHITE);
+		lblNombAyuda.setVisible(false);
+
+	}
+
+	protected void keyPressedTxtApellidoCliente(KeyEvent e) {
+		txtApellidoCliente.setBackground(Color.WHITE);
+		lblApeAyuda.setVisible(false);
+
+	}
+
+	protected void keyPressedTxtDniCliente(KeyEvent e) {
+		txtDniCliente.setBackground(Color.WHITE);
+		lblDniAyuda.setVisible(false);
+
+	}
+
+	protected void keyPressedTxtTelefonoCliente(KeyEvent e) {
+		txtTelefonoCliente.setBackground(Color.WHITE);
+		lblTelefAyuda.setVisible(false);
+
+	}
+
+	protected void actionPerformedBtnNuevo(ActionEvent e) {
+		txtCodigoCliente.setText("");
+		txtNombreCliente.setText("");
+		txtApellidoCliente.setText("");
+		txtDniCliente.setText("");
+		txtTelefonoCliente.setText("");
+	}
+
+	protected void actionPerformedBtnCodAyuda(ActionEvent e) {
+		lblCodAyuda.setVisible(true);
+	}
+
+	protected void actionPerformedBtnCodAyuda_1(ActionEvent e) {
+		lblNombAyuda.setVisible(true);
+
+	}
+
+	protected void actionPerformedBtnCodAyuda_2(ActionEvent e) {
+		lblApeAyuda.setVisible(true);
+
+	}
+
+	protected void actionPerformedBtnCodAyuda_3(ActionEvent e) {
+		lblDniAyuda.setVisible(true);
+
+	}
+
+	protected void actionPerformedBtnCodAyuda_4(ActionEvent e) {
+		lblTelefAyuda.setVisible(true);
+
+	}
+}

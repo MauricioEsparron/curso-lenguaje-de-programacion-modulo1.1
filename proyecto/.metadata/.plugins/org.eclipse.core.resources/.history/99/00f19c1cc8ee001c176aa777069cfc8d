@@ -1,0 +1,10 @@
+package entidad;
+
+import javax.swing.JFrame;
+
+public class Fondo extends JFrame {
+
+	public static void main(String[] args) {
+
+	}
+}

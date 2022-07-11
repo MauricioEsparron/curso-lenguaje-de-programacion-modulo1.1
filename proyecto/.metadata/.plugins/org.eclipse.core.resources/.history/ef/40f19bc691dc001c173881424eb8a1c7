@@ -1,0 +1,142 @@
+package vista;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+import javax.swing.JTextField;
+import com.toedter.calendar.JDateChooser;
+import javax.swing.JButton;
+
+public class FrmCuenta extends JInternalFrame {
+
+	private JPanel contentPane;
+	private JLabel lblNewLabel;
+	private JLabel lblNumeroTarjeta;
+	private JLabel lblCodigoCliente;
+	private JLabel lblCodigoCuenta;
+	private JLabel lblNumeroCuenta;
+	private JLabel lblFechaAfiliacion;
+	private JLabel lblFechaCaducidad;
+	private JLabel lblSaldo;
+	private JTextField txtNumeroTarjeta;
+	private JTextField txtCodigoCliente;
+	private JTextField txtCodigoCuenta;
+	private JTextField txtNumeroCuenta;
+	private JTextField txtSaldo;
+	private JDateChooser dcFechaCaducidad;
+	private JDateChooser dcFechaAfiliacion;
+	private JButton btnNuevo;
+	private JButton btnGuardar;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					FrmCuenta frame = new FrmCuenta();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public FrmCuenta() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 519, 523);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+
+		lblNewLabel = new JLabel("Mantenimiento de Tarjeta");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(0, 22, 503, 14);
+		contentPane.add(lblNewLabel);
+
+		lblNumeroTarjeta = new JLabel("Numero Tarjeta :");
+		lblNumeroTarjeta.setBounds(10, 62, 96, 14);
+		contentPane.add(lblNumeroTarjeta);
+
+		lblCodigoCliente = new JLabel("cod cliente :");
+		lblCodigoCliente.setBounds(10, 87, 96, 14);
+		contentPane.add(lblCodigoCliente);
+
+		lblCodigoCuenta = new JLabel("Cod cuenta :");
+		lblCodigoCuenta.setBounds(10, 112, 96, 14);
+		contentPane.add(lblCodigoCuenta);
+
+		lblNumeroCuenta = new JLabel("Num cuenta :");
+		lblNumeroCuenta.setBounds(10, 137, 96, 14);
+		contentPane.add(lblNumeroCuenta);
+
+		lblFechaAfiliacion = new JLabel("Fecha afiliación :");
+		lblFechaAfiliacion.setBounds(10, 163, 96, 14);
+		contentPane.add(lblFechaAfiliacion);
+
+		lblFechaCaducidad = new JLabel("Fecha caducidad :");
+		lblFechaCaducidad.setBounds(10, 188, 96, 14);
+		contentPane.add(lblFechaCaducidad);
+
+		lblSaldo = new JLabel("Saldo :");
+		lblSaldo.setBounds(10, 213, 96, 14);
+		contentPane.add(lblSaldo);
+
+		txtNumeroTarjeta = new JTextField();
+		txtNumeroTarjeta.setBounds(127, 59, 86, 20);
+		contentPane.add(txtNumeroTarjeta);
+		txtNumeroTarjeta.setColumns(10);
+
+		txtCodigoCliente = new JTextField();
+		txtCodigoCliente.setBounds(127, 84, 86, 20);
+		contentPane.add(txtCodigoCliente);
+		txtCodigoCliente.setColumns(10);
+
+		txtCodigoCuenta = new JTextField();
+		txtCodigoCuenta.setBounds(127, 109, 86, 20);
+		contentPane.add(txtCodigoCuenta);
+		txtCodigoCuenta.setColumns(10);
+
+		txtNumeroCuenta = new JTextField();
+		txtNumeroCuenta.setText(" ");
+		txtNumeroCuenta.setBounds(127, 134, 86, 20);
+		contentPane.add(txtNumeroCuenta);
+		txtNumeroCuenta.setColumns(10);
+
+		txtSaldo = new JTextField();
+		txtSaldo.setBounds(127, 210, 86, 20);
+		contentPane.add(txtSaldo);
+		txtSaldo.setColumns(10);
+
+		dcFechaCaducidad = new JDateChooser();
+		dcFechaCaducidad.setBounds(127, 182, 96, 20);
+		contentPane.add(dcFechaCaducidad);
+
+		dcFechaAfiliacion = new JDateChooser();
+		dcFechaAfiliacion.setBounds(127, 157, 96, 20);
+		contentPane.add(dcFechaAfiliacion);
+
+		btnNuevo = new JButton("Nuevo");
+		btnNuevo.setBounds(336, 58, 104, 29);
+		contentPane.add(btnNuevo);
+
+		btnGuardar = new JButton("Guardar");
+		btnGuardar.setBounds(336, 97, 104, 29);
+		contentPane.add(btnGuardar);
+	}
+}

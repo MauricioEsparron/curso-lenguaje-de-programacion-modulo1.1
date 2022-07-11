@@ -1,0 +1,25 @@
+package utils;
+
+import java.util.Random;
+
+public class GeneradorDeNumeros {
+
+	public static void main(String[] args) {
+
+		Random dado = new Random();
+
+		int numero;
+
+		//define la cantidad de numeros a imprimir
+		for (int i = 0; i < 5; i++) {
+
+			//define el randgo de numeros agenerar
+			numero = (int)(dado.nextDouble(999999999 - 900000000 + 1) + 900000000);
+			System.out.println(numero+numero);
+
+		}
+		
+		
+
+	}
+}

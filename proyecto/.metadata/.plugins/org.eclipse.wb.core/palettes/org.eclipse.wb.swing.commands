@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<commands>
+	<addComponent
+		id="com.toedter.calendar.JDateChooser_1653527637151"
+		name="JDateChooser"
+		description="Custom component: com.toedter.calendar.JDateChooser"
+		visible="true"
+		class="com.toedter.calendar.JDateChooser"
+		category="org.eclipse.wb.swing.components"/>
+	<moveEntry
+		id="system.marquee"
+		category="org.eclipse.wb.swing.system"/>
+	<moveEntry
+		id="org.eclipse.wb.swing.components.menu javax.swing.JMenu"
+		category="org.eclipse.wb.swing.components.menu"
+		nextEntry="org.eclipse.wb.swing.components.menu javax.swing.JRadioButtonMenuItem"/>
+	<moveEntry
+		id="org.eclipse.wb.swing.containers javax.swing.JDesktopPane"
+		category="org.eclipse.wb.swing.containers"/>
+</commands>

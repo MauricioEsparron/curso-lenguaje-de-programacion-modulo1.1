@@ -1,0 +1,10 @@
+package utils;
+
+import javax.swing.JOptionPane;
+
+public class Mensaje {
+	private void mensajeError(String msj) {
+		JOptionPane.showMessageDialog(this, msj, "Error !!!", 0);
+
+	}
+}

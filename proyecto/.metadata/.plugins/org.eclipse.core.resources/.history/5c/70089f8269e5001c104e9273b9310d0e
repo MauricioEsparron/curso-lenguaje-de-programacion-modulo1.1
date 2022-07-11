@@ -1,0 +1,7 @@
+package entidad;
+
+public class TipoOperacion {
+
+	private int cod_operacion;
+	private String descripcion;
+}

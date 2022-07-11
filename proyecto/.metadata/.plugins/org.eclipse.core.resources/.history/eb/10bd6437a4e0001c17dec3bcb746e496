@@ -1,0 +1,213 @@
+package vista;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
+import javax.swing.JButton;
+import javax.swing.ImageIcon;
+import java.awt.Font;
+import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class FrmCliente extends JInternalFrame implements ActionListener {
+
+	private JPanel contentPane;
+	private JLabel lblCodigoCliente;
+	private JLabel lblnombreCliente;
+	private JLabel lblApellidoCliente;
+	private JLabel lblDniCliente;
+	private JLabel lblTelefonoCliente;
+	private JTextField txtCodigoCliente;
+	private JTextField txtNombreCliente;
+	private JTextField txtApellidoCliente;
+	private JTextField txtDniCliente;
+	private JTextField txtTelefonoCliente;
+	private JTable tblCliente;
+	private JScrollPane scrollPane;
+	private JButton btnNuevo;
+	private JButton btnGuardar;
+	private JButton btnEditar;
+	private JButton btnConsultar;
+
+	DefaultTableModel model = new DefaultTableModel();
+	private JLabel lblNewLabel;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					FrmCliente frame = new FrmCliente();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public FrmCliente() {
+		setClosable(true);
+		setIconifiable(true);
+		setMaximizable(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 561, 469);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+
+		lblCodigoCliente = new JLabel("Codigo :");
+		lblCodigoCliente.setBounds(10, 71, 62, 14);
+		contentPane.add(lblCodigoCliente);
+
+		lblnombreCliente = new JLabel("Nombre :");
+		lblnombreCliente.setBounds(10, 96, 62, 14);
+		contentPane.add(lblnombreCliente);
+
+		lblApellidoCliente = new JLabel("Apellido :");
+		lblApellidoCliente.setBounds(10, 121, 62, 14);
+		contentPane.add(lblApellidoCliente);
+
+		lblDniCliente = new JLabel("Dni :");
+		lblDniCliente.setBounds(10, 146, 62, 14);
+		contentPane.add(lblDniCliente);
+
+		lblTelefonoCliente = new JLabel("Telefono :");
+		lblTelefonoCliente.setBounds(10, 171, 62, 14);
+		contentPane.add(lblTelefonoCliente);
+
+		txtCodigoCliente = new JTextField();
+		txtCodigoCliente.setBounds(101, 68, 86, 20);
+		contentPane.add(txtCodigoCliente);
+		txtCodigoCliente.setColumns(10);
+
+		txtNombreCliente = new JTextField();
+		txtNombreCliente.setBounds(101, 93, 131, 20);
+		contentPane.add(txtNombreCliente);
+		txtNombreCliente.setColumns(10);
+
+		txtApellidoCliente = new JTextField();
+		txtApellidoCliente.setBounds(101, 118, 131, 20);
+		contentPane.add(txtApellidoCliente);
+		txtApellidoCliente.setColumns(10);
+
+		txtDniCliente = new JTextField();
+		txtDniCliente.setBounds(101, 143, 86, 20);
+		contentPane.add(txtDniCliente);
+		txtDniCliente.setColumns(10);
+
+		txtTelefonoCliente = new JTextField();
+		txtTelefonoCliente.setBounds(101, 168, 86, 20);
+		contentPane.add(txtTelefonoCliente);
+		txtTelefonoCliente.setColumns(10);
+
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 214, 525, 170);
+		contentPane.add(scrollPane);
+
+		tblCliente = new JTable();
+		tblCliente.setFillsViewportHeight(true);
+		scrollPane.setViewportView(tblCliente);
+
+		btnNuevo = new JButton("Nuevo");
+		btnNuevo.setIcon(new ImageIcon(FrmCliente.class.getResource("/img/370092_add_plus_create_new_icon.png")));
+		btnNuevo.setBounds(389, 56, 134, 34);
+		contentPane.add(btnNuevo);
+
+		btnGuardar = new JButton("Guardar");
+		btnGuardar.addActionListener(this);
+		btnGuardar.setIcon(
+				new ImageIcon(FrmCliente.class.getResource("/img/7351060_bookmark_favorite_star_save_icon.png")));
+		btnGuardar.setBounds(389, 101, 134, 34);
+		contentPane.add(btnGuardar);
+
+		btnEditar = new JButton("Editar");
+		btnEditar.setIcon(new ImageIcon(
+				FrmCliente.class.getResource("/img/1976055_edit_edit document_edit file_edited_editing_icon.png")));
+		btnEditar.setBounds(389, 142, 134, 34);
+		contentPane.add(btnEditar);
+
+		btnConsultar = new JButton("Consular");
+		btnConsultar.setBounds(226, 396, 89, 23);
+		contentPane.add(btnConsultar);
+
+		model.addColumn("Código");
+		model.addColumn("Nombre");
+		model.addColumn("Apellido");
+		model.addColumn("Dni");
+		model.addColumn("Telefono");
+
+		tblCliente.setModel(model);
+
+		lblNewLabel = new JLabel("Mantenimiento Cliente");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel.setBounds(10, 24, 222, 14);
+		contentPane.add(lblNewLabel);
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnGuardar) {
+			actionPerformedBtnGuardar(e);
+		}
+	}
+
+	protected void actionPerformedBtnGuardar(ActionEvent e) {
+		ingresar();
+	}
+
+	private void ingresar() {
+
+		int cod;
+		String nomb;
+		String ape;
+		int dni;
+		int telef;
+
+		cod = leerCodigo();
+		nomb = leerNombre();
+		ape = leerApellido();
+		dni = leerDni();
+		telef = leerTelefono();
+
+	}
+
+	private int leerTelefono() {
+		int telef;
+		telef = txtTelefonoCliente.getText();
+
+		return telef;
+	}
+
+	private int leerDni() {
+		return 0;
+	}
+
+	private String leerApellido() {
+		return null;
+	}
+
+	private String leerNombre() {
+		return null;
+	}
+
+	private int leerCodigo() {
+		return 0;
+	}
+}

@@ -1,0 +1,10 @@
+package interfaces;
+
+import java.util.ArrayList;
+
+import entidad.TipoOperacion;
+
+public interface TipoOperacionInterfacesDAO {
+
+	public ArrayList<TipoOperacion> listaTipooperacion();
+}

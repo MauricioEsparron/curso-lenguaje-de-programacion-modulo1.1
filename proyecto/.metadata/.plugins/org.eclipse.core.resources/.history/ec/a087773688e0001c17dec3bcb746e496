@@ -1,0 +1,12 @@
+package entidad;
+
+public class Cuenta {
+
+	private int cod;
+	private String nombre;
+	private String apellido;
+	private int dni;
+	private int telefono;
+	
+	
+}

@@ -1,0 +1,17 @@
+package hilos;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class HiloHora {
+	
+	public void run() {
+		
+		Date hora = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
+		lblHora.setText(sdf.format(hora));
+	}
+	
+	
+	
+}

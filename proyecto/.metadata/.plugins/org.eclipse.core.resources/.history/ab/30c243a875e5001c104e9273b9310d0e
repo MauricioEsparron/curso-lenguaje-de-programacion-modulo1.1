@@ -1,0 +1,10 @@
+package interfaces;
+
+import java.util.ArrayList;
+
+import entidad.TipoCuenta;
+
+public interface TipoCuentaInterfacesDAO {
+	public ArrayList<TipoCuenta> listaTipoCuenta();
+
+}

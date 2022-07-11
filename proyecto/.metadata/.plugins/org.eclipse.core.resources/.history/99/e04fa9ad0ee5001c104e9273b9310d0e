@@ -1,0 +1,25 @@
+package mantenimiento;
+
+import entidad.Tarjeta;
+import interfaces.TarjetaInrterfacesDAO;
+
+public class GestionTarjetaDAO implements TarjetaInrterfacesDAO{
+
+	@Override
+	public int registrar(Tarjeta t) {
+		return 0;
+	}
+
+	@Override
+	public int actualizar(Tarjeta t) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int eliminar(int num_Tarjeta) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

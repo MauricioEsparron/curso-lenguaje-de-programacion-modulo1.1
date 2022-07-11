@@ -1,0 +1,13 @@
+package mantenimiento;
+
+import entidad.Tarjeta;
+import interfaces.TarjetaInrterfacesDAO;
+
+public class GestionTarjetaDAO implements TarjetaInrterfacesDAO{
+
+	@Override
+	public int registrar(Tarjeta t) {
+		return 0;
+	}
+
+}

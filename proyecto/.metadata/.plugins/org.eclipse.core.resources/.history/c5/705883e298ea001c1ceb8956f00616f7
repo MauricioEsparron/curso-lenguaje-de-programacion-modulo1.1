@@ -1,0 +1,27 @@
+package mantenimiento;
+
+import entidad.Movimiento;
+import interfaces.MovimientoInterfacesDAO;
+
+public class GestionMovimientoDAO implements MovimientoInterfacesDAO {
+
+	@Override
+	public int registrar(Movimiento m) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int actualizar(Movimiento m) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int eliminar(int codigoMovimiento) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}
+ 

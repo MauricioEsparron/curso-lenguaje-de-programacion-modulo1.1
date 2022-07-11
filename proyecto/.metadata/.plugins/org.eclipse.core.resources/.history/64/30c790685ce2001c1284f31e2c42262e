@@ -1,0 +1,28 @@
+package mantenimiento;
+
+import java.sql.Connection;
+
+import entidad.Cliente;
+import interfaces.ClienteInterfacesDAO;
+
+public class GestionClienteDAO implements ClienteInterfacesDAO {
+
+	@Override
+	public int registrar(Cliente c) {
+
+		int res = 0;
+		Connection con = null;
+		return res;
+	}
+
+	@Override
+	public int actualizar(Cliente c) {
+		return 0;
+	}
+
+	@Override
+	public int eliminar(int codigoCliente) {
+		return 0;
+	}
+
+}

@@ -1,0 +1,14 @@
+package utils;
+
+public class Validaciones {
+
+	public static final String CODIGO_CLIENTE = "\\d{4}";
+	public static final String DNI = "\\d{8}";
+	public static final String CODIGO_PRODUCTO = "[Pp]\\d{4}";
+	public static final String TEXTO = "[a-zA-ZZáéíóúÁÉÍÓÚ\\s]{3,15}";
+	public static final String NOMBRE = "[a-zA-ZáéíóúÁÉÍÓÚ\\s]{3,45}";
+	public static final String APELLIDO = "[a-zA-ZáéíóúÁÉÍÓÚ\\s]{3,45}";
+	public static final String TELEFONO = "\\d{9}";
+	public static final String NUM_TARJETA = "\\d{16}";
+	public static final String MONTO = "<= 5000";
+}
